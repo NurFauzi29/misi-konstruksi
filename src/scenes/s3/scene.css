@@ -1,0 +1,16 @@
+/* GENERATED dari mockup/3. Tebak Profesi.dc.html */
+html,body{margin:0;padding:0;background:#0c1116;overflow:hidden;height:100%}
+@keyframes tpFade{from{opacity:0}to{opacity:1}}
+@keyframes tpPop{0%{transform:scale(.9);opacity:0}60%{transform:scale(1.03);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes tpPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,214,26,.85)}70%{box-shadow:0 0 0 1.2em rgba(255,214,26,0)}}
+@keyframes tpDrop{0%{transform:scale(.82);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes tpToast{0%{transform:translate(-50%,1em);opacity:0}12%{transform:translate(-50%,0);opacity:1}80%{opacity:1}100%{opacity:0}}
+a{color:#f4ab03}a:hover{color:#ffd257}
+.s3p0:hover{transform:scale(1.05) !important}
+.s3p1:active{transform:scale(.97) !important}
+.s3p2:hover{transform:scale(1.07) !important}
+.s3p3:active{transform:scale(.95) !important}
+.s3p4:hover{transform:scale(1.045) !important;box-shadow:0 .4em .7em rgba(0,0,0,.28) !important}
+.s3p5:active{transform:scale(.98) !important}
+.s3p6:hover{transform:translateY(-.08em) !important}
+.s3p7:active{transform:translateY(.08em) !important}

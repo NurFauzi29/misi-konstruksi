@@ -1,0 +1,20 @@
+/* GENERATED dari mockup/4. Pengalaman Kerja.dc.html */
+html,body{margin:0;padding:0;background:#0c1116;overflow:hidden;height:100%}
+@keyframes s4Fade{from{opacity:0}to{opacity:1}}
+@keyframes s4Pop{0%{transform:scale(.93);opacity:0}60%{transform:scale(1.02);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes s4Pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,214,26,.85)}70%{box-shadow:0 0 0 1.1em rgba(255,214,26,0)}}
+@keyframes s4Toast{0%{transform:translate(-50%,1em);opacity:0}12%{transform:translate(-50%,0);opacity:1}82%{opacity:1}100%{opacity:0}}
+@keyframes s4Chest{0%{transform:translateY(0) scale(.9);opacity:0}45%{transform:translateY(-.6em) scale(1.06);opacity:1}100%{transform:translateY(-.3em) scale(1.02);opacity:1}}
+@keyframes s4Star{0%{transform:scale(.4) rotate(-25deg);opacity:0}70%{transform:scale(1.15) rotate(6deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
+a{color:#f4ab03}a:hover{color:#ffd257}
+.s4p0:hover{transform:scale(1.05) !important}
+.s4p1:active{transform:scale(.97) !important}
+.s4p2:hover{transform:scale(1.09) !important}
+.s4p3:active{transform:scale(1.03) !important}
+.s4p4:hover{transform:translateY(-.12em) !important}
+.s4p5:active{transform:translateY(.08em) !important}
+.s4p6:hover{transform:scale(1.06) !important}
+.s4p7:hover{transform:translateX(.2em) !important}
+.s4p8:hover{transform:translateY(-.1em) !important}
+.s4p9:hover{transform:scale(1.07) !important}
+.s4pa:active{transform:scale(.95) !important}

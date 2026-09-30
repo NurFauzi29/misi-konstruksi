@@ -1,0 +1,25 @@
+/* GENERATED dari mockup/5. Profesi Pertama.dc.html */
+html,body{margin:0;padding:0;background:#0c1116;overflow:hidden;height:100%}
+@keyframes p5Fade{from{opacity:0}to{opacity:1}}
+@keyframes p5Pop{0%{transform:scale(.92);opacity:0}62%{transform:scale(1.03);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes p5Rise{0%{transform:translateY(1.4em);opacity:0}100%{transform:translateY(0);opacity:1}}
+@keyframes p5Glow{0%,100%{box-shadow:0 .45em .8em rgba(0,0,0,.4),0 0 0 0 rgba(255,214,26,.7)}70%{box-shadow:0 .45em .8em rgba(0,0,0,.4),0 0 0 1.1em rgba(255,214,26,0)}}
+@keyframes p5Toast{0%{transform:translate(-50%,1em);opacity:0}12%{transform:translate(-50%,0);opacity:1}84%{opacity:1}100%{opacity:0}}
+a{color:#f4ab03}a:hover{color:#ffd257}
+.s5p0:hover{filter:brightness(1.06) !important}
+.s5p1:active{transform:translateX(-50%) scale(.98) !important}
+.s5p2:hover{transform:scale(1.07) !important}
+.s5p3:hover{transform:scale(1.05) !important}
+.s5p4:active{transform:scale(.97) !important}
+.s5p5:hover{transform:translateY(-.35em) scale(1.04) !important}
+.s5p6:active{transform:scale(.99) !important}
+.s5p7:hover{transform:translateY(-.1em) !important}
+.s5p8:active{transform:translateY(.06em) !important}
+.s5p9:hover{background:#eef3fa !important}
+.s5pa:hover{transform:translateY(-.08em) !important}
+.s5pb:hover{transform:scale(1.06) !important}
+.s5pc:hover{transform:translateY(-.2em) !important}
+.s5pd:hover{transform:translateX(.2em) !important}
+.s5pe:hover{transform:translateY(-.12em) !important}
+.s5pf:hover{transform:translateX(.15em) !important}
+.s5pg:hover{transform:translateY(-.15em) !important}

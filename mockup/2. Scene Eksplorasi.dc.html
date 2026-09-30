@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="ext-resource-dependency" content="assets/s2/p-shelf-1.webp" data-resource-id="assets/s2/p-shelf-1.webp">
+<meta name="ext-resource-dependency" content="assets/s2/p-shelf-2.webp" data-resource-id="assets/s2/p-shelf-2.webp">
+<meta name="ext-resource-dependency" content="assets/s2/p-mandor.webp" data-resource-id="assets/s2/p-mandor.webp">
+<meta name="ext-resource-dependency" content="assets/s2/p-surveyor.webp" data-resource-id="assets/s2/p-surveyor.webp">
+<meta name="ext-resource-dependency" content="assets/s2/p-estimator.webp" data-resource-id="assets/s2/p-estimator.webp">
+<meta name="ext-resource-dependency" content="assets/s2/p-logistik.webp" data-resource-id="assets/s2/p-logistik.webp">
+<meta name="ext-resource-dependency" content="assets/s2/p-pengawas.webp" data-resource-id="assets/s2/p-pengawas.webp">
+<meta name="ext-resource-dependency" content="assets/s2/p-pelaksana.webp" data-resource-id="assets/s2/p-pelaksana.webp">
+<meta name="ext-resource-dependency" content="assets/s2/p-asisten.webp" data-resource-id="assets/s2/p-asisten.webp">
+<meta name="ext-resource-dependency" content="assets/s2/p-admin.webp" data-resource-id="assets/s2/p-admin.webp">
+<meta name="ext-resource-dependency" content="assets/s2/card-mandor.webp" data-resource-id="assets/s2/card-mandor.webp">
+<meta name="ext-resource-dependency" content="assets/s2/card-surveyor.webp" data-resource-id="assets/s2/card-surveyor.webp">
+<meta name="ext-resource-dependency" content="assets/s2/card-estimator.webp" data-resource-id="assets/s2/card-estimator.webp">
+<meta name="ext-resource-dependency" content="assets/s2/card-logistik.webp" data-resource-id="assets/s2/card-logistik.webp">
+<meta name="ext-resource-dependency" content="assets/s2/card-pengawas.webp" data-resource-id="assets/s2/card-pengawas.webp">
+<meta name="ext-resource-dependency" content="assets/s2/card-pelaksana.webp" data-resource-id="assets/s2/card-pelaksana.webp">
+<meta name="ext-resource-dependency" content="assets/s2/card-asisten.webp" data-resource-id="assets/s2/card-asisten.webp">
+<meta name="ext-resource-dependency" content="assets/s2/card-admin.webp" data-resource-id="assets/s2/card-admin.webp">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+html,body{margin:0;padding:0;background:#0c1116;overflow:hidden;height:100%}
+@keyframes s2Fade{from{opacity:0}to{opacity:1}}
+@keyframes s2Pop{0%{transform:scale(.9);opacity:0}60%{transform:scale(1.02);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes s2Pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,214,26,.85)}70%{box-shadow:0 0 0 1.2em rgba(255,214,26,0)}}
+@keyframes s2Check{0%{transform:scale(0) rotate(-40deg);opacity:0}70%{transform:scale(1.18) rotate(4deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
+@keyframes s2Toast{0%{transform:translate(-50%,1em);opacity:0}12%{transform:translate(-50%,0);opacity:1}80%{opacity:1}100%{opacity:0}}
+a{color:#f4ab03}a:hover{color:#ffd257}
+</style>
+<script>
+window.__dcGo = function (path) {
+  var url = encodeURI(path);
+  var embedded = false;
+  try { embedded = !!(window.parent && window.parent !== window); } catch (e) {}
+  try { if (embedded) window.parent.postMessage({ type: 'omelette:navigate', path: path, file: path, url: url }, '*'); } catch (e) {}
+  if (embedded && window.__mkShell) return;
+  try { if (window.top && window.top !== window) { window.top.location.href = url; return; } } catch (e) {}
+  window.location.href = url;
+};
+try { if (window.parent && window.parent !== window && window.parent.__mkShellHost) window.__mkShell = true; } catch (e) {}
+</script>
+</helmet>
+<template id="__bundler_thumbnail" data-bg-color="#0c1116"><svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="800" fill="#0c1116"/></svg></template>
+<div style="width:100%;height:100vh;display:flex;align-items:center;justify-content:center;background:#0c1116">
+<div style="position:relative;width:min(100vw,177.78vh);height:min(56.25vw,100vh);font-size:min(1vw,1.7778vh);overflow:hidden;background:#7a5a2e;box-shadow:0 0 4em rgba(0,0,0,.6)">
+
+<sc-if value="{{ isMap }}" hint-placeholder-val="{{ true }}">
+  <div style="position:absolute;inset:0;animation:s2Fade .25s ease both">
+    <img src="{{ mapSrc }}" alt="Peta misi konstruksi" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+    <sc-for list="{{ mapNodes }}" as="n" hint-placeholder-count="0"><button type="button" onClick="{{ n.onClick }}" title="{{ n.title }}" style="position:absolute;left:{{ n.left }};top:{{ n.top }};width:12%;height:25%;padding:0;border:0;border-radius:1.4em;background:transparent;cursor:pointer;transition:transform .16s ease" style-hover="transform:scale(1.05)" style-active="transform:scale(.97)"></button></sc-for>
+    <sc-if value="{{ mapAllDone }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:84.3%;top:19%;width:3.6%;aspect-ratio:1;border-radius:50%;background:#2e9c3a;border:.25em solid #fff;display:flex;align-items:center;justify-content:center;box-shadow:0 .2em .4em rgba(0,0,0,.35);pointer-events:none"><svg viewBox="0 0 24 24" aria-hidden="true" style="width:62%;height:62%"><path d="M5 12.5l4.2 4.2L19 7" stroke="#fff" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></sc-if>
+    <div style="position:absolute;right:2%;top:2.6%;display:flex;align-items:center;gap:.6em;z-index:30">
+      <button type="button" onClick="{{ toggleMusic }}" title="Nyalakan / matikan musik" style="position:relative;width:3.4em;height:3.4em;display:flex;align-items:center;justify-content:center;padding:0;border:.22em solid #fff;border-radius:50%;background:linear-gradient(#5aa9f2,#2170cd 62%,#175aa8);cursor:pointer;box-shadow:0 .28em .45em rgba(0,0,0,.4),inset 0 -.28em .45em rgba(0,0,0,.22);transition:transform .15s ease" style-hover="transform:scale(1.07)" style-active="transform:scale(.95)">
+        <svg viewBox="0 0 24 24" aria-hidden="true" style="width:58%;height:58%"><path d="M4 9.5h3.2L12 5.4v13.2L7.2 14.5H4z" fill="#fff"></path><path d="M15.2 9.2a4 4 0 0 1 0 5.6" stroke="#fff" stroke-width="1.9" stroke-linecap="round" fill="none" opacity="{{ waveOpacity }}"></path><path d="M17.8 6.9a7.4 7.4 0 0 1 0 10.2" stroke="#fff" stroke-width="1.9" stroke-linecap="round" fill="none" opacity="{{ waveOpacity }}"></path><path d="M15.2 8.4l6.4 7.2M21.6 8.4l-6.4 7.2" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="{{ muteOpacity }}"></path></svg>
+      </button>
+      <button type="button" onClick="{{ onHome }}" title="Kembali ke Home" style="position:relative;width:3.4em;height:3.4em;display:flex;align-items:center;justify-content:center;padding:0;border:.22em solid #fff;border-radius:50%;background:linear-gradient(#ffb23e,#f57c00 62%,#cf5a00);cursor:pointer;box-shadow:0 .28em .45em rgba(0,0,0,.4),inset 0 -.28em .45em rgba(0,0,0,.22);transition:transform .15s ease" style-hover="transform:scale(1.07)" style-active="transform:scale(.95)">
+        <svg viewBox="0 0 24 24" aria-hidden="true" style="width:58%;height:58%"><path d="M12 3.2 2.8 11h2.6v9.2h5.2v-5.6h2.8v5.6h5.2V11h2.6z" fill="#fff"></path></svg>
+      </button>
+    </div>
+    <div style="position:absolute;left:50%;bottom:3.2%;transform:translateX(-50%);padding:.45em 1.3em;border-radius:2em;background:rgba(12,17,22,.95);border:.12em solid rgba(255,255,255,.35);color:#ffd11a;z-index:20;font-family:'Trebuchet MS',sans-serif;font-size:1.7em;white-space:nowrap;pointer-events:none">{{ progressLabel }}</div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isShelf }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;inset:0;animation:s2Fade .25s ease both">
+    <div role="img" aria-label="Rak profesi konstruksi" style="position:absolute;inset:0;background-image:{{ shelfBgCss }};background-size:cover;background-position:center"></div>
+
+    <sc-for list="{{ cards }}" as="card" hint-placeholder-count="8">
+      <button type="button" onClick="{{ card.open }}" title="{{ card.title }}" style="position:absolute;left:{{ card.left }};top:{{ card.top }};width:9.6%;height:21.3%;padding:0;border:.25em solid rgba(255,255,255,0);border-radius:1.1em;background:transparent;cursor:pointer;transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease" style-hover="transform:scale(1.045);border-color:rgba(255,209,26,.95);box-shadow:0 0 1.6em rgba(255,209,26,.55)" style-active="transform:scale(.98)">
+        <div role="img" aria-label="{{ card.title }}" style="position:absolute;inset:0;background-image:{{ card.bg }};background-size:contain;background-position:center;background-repeat:no-repeat;filter:drop-shadow(0 .3em .45em rgba(0,0,0,.45))"></div>
+        <span style="position:absolute;right:.5em;bottom:.5em;width:2.6em;height:2.6em;display:none;display:{{ card.checkDisplay }};align-items:center;justify-content:center;border-radius:50%;border:.22em solid #fff;background:linear-gradient(#5fc21a,#2f8a06);box-shadow:0 .25em .4em rgba(0,0,0,.45);animation:s2Check .35s cubic-bezier(.2,1.4,.4,1) both">
+          <svg viewBox="0 0 24 24" style="width:1.7em;height:1.7em"><path d="M5 12.6l4.6 4.6L19 7.5" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
+        </span>
+      </button>
+    </sc-for>
+
+    <sc-if value="{{ allDone }}" hint-placeholder-val="{{ false }}">
+      <button type="button" onClick="{{ onNext }}" title="Lanjut ke misi berikutnya" style="position:absolute;right:2.2%;bottom:3.4%;display:flex;align-items:center;gap:.5em;padding:.5em 1.4em;border:.22em solid #b07708;border-radius:1em;background:linear-gradient(#ffd75e,#f5a406);color:#3a2a06;font-family:'Trebuchet MS',sans-serif;font-size:2em;font-weight:800;letter-spacing:.05em;cursor:pointer;box-shadow:0 .4em .7em rgba(0,0,0,.4);animation:s2Pop .4s cubic-bezier(.2,1.3,.4,1) both;transition:transform .16s ease" style-hover="transform:scale(1.04)" style-active="transform:scale(.97)">SELANJUTNYA ❯</button>
+    </sc-if>
+
+    <div style="position:absolute;right:2%;top:2.6%;display:flex;align-items:center;gap:.6em;z-index:30">
+      <button type="button" onClick="{{ toggleMusic }}" title="Nyalakan / matikan musik" style="position:relative;width:3.4em;height:3.4em;display:flex;align-items:center;justify-content:center;padding:0;border:.22em solid #fff;border-radius:50%;background:linear-gradient(#5aa9f2,#2170cd 62%,#175aa8);cursor:pointer;box-shadow:0 .28em .45em rgba(0,0,0,.4),inset 0 -.28em .45em rgba(0,0,0,.22);transition:transform .15s ease" style-hover="transform:scale(1.07)" style-active="transform:scale(.95)">
+        <svg viewBox="0 0 24 24" aria-hidden="true" style="width:58%;height:58%"><path d="M4 9.5h3.2L12 5.4v13.2L7.2 14.5H4z" fill="#fff"></path><path d="M15.2 9.2a4 4 0 0 1 0 5.6" stroke="#fff" stroke-width="1.9" stroke-linecap="round" fill="none" opacity="{{ waveOpacity }}"></path><path d="M17.8 6.9a7.4 7.4 0 0 1 0 10.2" stroke="#fff" stroke-width="1.9" stroke-linecap="round" fill="none" opacity="{{ waveOpacity }}"></path><path d="M15.2 8.4l6.4 7.2M21.6 8.4l-6.4 7.2" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="{{ muteOpacity }}"></path></svg>
+      </button>
+      <button type="button" onClick="{{ onMaps }}" title="Kembali ke peta" style="position:relative;width:3.4em;height:3.4em;display:flex;align-items:center;justify-content:center;padding:0;border:.22em solid #fff;border-radius:50%;background:linear-gradient(#7cd08a,#2e9c3a 62%,#1d6a26);cursor:pointer;box-shadow:0 .28em .45em rgba(0,0,0,.4),inset 0 -.28em .45em rgba(0,0,0,.22);transition:transform .15s ease" style-hover="transform:scale(1.07)" style-active="transform:scale(.95)">
+        <svg viewBox="0 0 24 24" aria-hidden="true" style="width:58%;height:58%"><path d="M3.4 6.2 9 4.2v13.6l-5.6 2z" fill="#fff"></path><path d="M9 4.2l6 2v13.6l-6-2z" fill="#e8f5ea"></path><path d="M15 6.2l5.6-2v13.6l-5.6 2z" fill="#fff"></path></svg>
+      </button>
+      <button type="button" onClick="{{ onHome }}" title="Kembali ke Home" style="position:relative;width:3.4em;height:3.4em;display:flex;align-items:center;justify-content:center;padding:0;border:.22em solid #fff;border-radius:50%;background:linear-gradient(#ffb23e,#f57c00 62%,#cf5a00);cursor:pointer;box-shadow:0 .28em .45em rgba(0,0,0,.4),inset 0 -.28em .45em rgba(0,0,0,.22);transition:transform .15s ease" style-hover="transform:scale(1.07)" style-active="transform:scale(.95)">
+        <svg viewBox="0 0 24 24" aria-hidden="true" style="width:58%;height:58%"><path d="M12 3.2 2.8 11h2.6v9.2h5.2v-5.6h2.8v5.6h5.2V11h2.6z" fill="#fff"></path></svg>
+      </button>
+    </div>
+    <div style="position:absolute;left:2%;bottom:3.4%;padding:.5em 1.2em;border-radius:2em;background:rgba(12,17,22,.92);border:.12em solid rgba(255,255,255,.3);color:#fff;font-family:'Trebuchet MS',sans-serif;font-size:1.7em;pointer-events:none;z-index:20">{{ progressLabel }}</div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ detailSrc }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#0a1220;animation:s2Fade .22s ease both">
+    <div style="position:relative;height:100%;aspect-ratio:1536/1024;max-width:100%">
+      <div role="img" aria-label="Penjelasan profesi" style="display:block;width:100%;height:100%;background-image:{{ detailCss }};background-size:contain;background-position:center;background-repeat:no-repeat"></div>
+      <button type="button" onClick="{{ onBackToShelf }}" title="Kembali ke rak profesi" style="position:absolute;left:1.7%;bottom:2.8%;width:14%;height:7.4%;padding:0;border:0;border-radius:.8em;background:transparent;cursor:pointer;transition:transform .16s ease" style-hover="transform:scale(1.05)" style-active="transform:scale(.97)"></button>
+      <div style="position:absolute;right:2%;top:2.6%;display:flex;align-items:center;gap:.55em;z-index:30">
+        <button type="button" onClick="{{ toggleMusic }}" title="Nyalakan / matikan musik" style="position:relative;width:3.2em;height:3.2em;display:flex;align-items:center;justify-content:center;padding:0;border:.22em solid #fff;border-radius:50%;background:linear-gradient(#5aa9f2,#2170cd 62%,#175aa8);cursor:pointer;box-shadow:0 .28em .45em rgba(0,0,0,.4),inset 0 -.28em .45em rgba(0,0,0,.22);transition:transform .15s ease" style-hover="transform:scale(1.07)" style-active="transform:scale(.95)">
+          <svg viewBox="0 0 24 24" aria-hidden="true" style="width:58%;height:58%"><path d="M4 9.5h3.2L12 5.4v13.2L7.2 14.5H4z" fill="#fff"></path><path d="M15.2 9.2a4 4 0 0 1 0 5.6" stroke="#fff" stroke-width="1.9" stroke-linecap="round" fill="none" opacity="{{ waveOpacity }}"></path><path d="M17.8 6.9a7.4 7.4 0 0 1 0 10.2" stroke="#fff" stroke-width="1.9" stroke-linecap="round" fill="none" opacity="{{ waveOpacity }}"></path><path d="M15.2 8.4l6.4 7.2M21.6 8.4l-6.4 7.2" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="{{ muteOpacity }}"></path></svg>
+        </button>
+        <button type="button" onClick="{{ onMaps }}" title="Kembali ke peta" style="position:relative;width:3.2em;height:3.2em;display:flex;align-items:center;justify-content:center;padding:0;border:.22em solid #fff;border-radius:50%;background:linear-gradient(#7cd08a,#2e9c3a 62%,#1d6a26);cursor:pointer;box-shadow:0 .28em .45em rgba(0,0,0,.4),inset 0 -.28em .45em rgba(0,0,0,.22);transition:transform .15s ease" style-hover="transform:scale(1.07)" style-active="transform:scale(.95)">
+          <svg viewBox="0 0 24 24" aria-hidden="true" style="width:58%;height:58%"><path d="M3.4 6.2 9 4.2v13.6l-5.6 2z" fill="#fff"></path><path d="M9 4.2l6 2v13.6l-6-2z" fill="#e8f5ea"></path><path d="M15 6.2l5.6-2v13.6l-5.6 2z" fill="#fff"></path></svg>
+        </button>
+        <button type="button" onClick="{{ onHome }}" title="Kembali ke Home" style="position:relative;width:3.2em;height:3.2em;display:flex;align-items:center;justify-content:center;padding:0;border:.22em solid #fff;border-radius:50%;background:linear-gradient(#ffb23e,#f57c00 62%,#cf5a00);cursor:pointer;box-shadow:0 .28em .45em rgba(0,0,0,.4),inset 0 -.28em .45em rgba(0,0,0,.22);transition:transform .15s ease" style-hover="transform:scale(1.07)" style-active="transform:scale(.95)">
+          <svg viewBox="0 0 24 24" aria-hidden="true" style="width:58%;height:58%"><path d="M12 3.2 2.8 11h2.6v9.2h5.2v-5.6h2.8v5.6h5.2V11h2.6z" fill="#fff"></path></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<button type="button" onClick="{{ toggleMusic }}" title="Nyalakan / matikan musik" style="position:absolute;left:{{ speakerLeft }};top:{{ speakerTop }};width:{{ speakerWidth }};height:{{ speakerHeight }};display:none;display:{{ speakerDisplay }};align-items:center;justify-content:center;padding:0;border:0;border-radius:.9em;background:transparent;cursor:pointer;transition:transform .15s ease" style-hover="transform:scale(1.07)" style-active="transform:scale(.95)">
+  <span style="position:absolute;left:50%;top:50%;width:122%;aspect-ratio:1;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;border-radius:50%; border: .22em solid #fff; background: linear-gradient(#5aa9f2,#2170cd 62%,#175aa8); box-shadow: 0 .28em .45em rgba(0,0,0,.4),inset 0 -.28em .45em rgba(0,0,0,.22)">
+          <svg viewBox="0 0 24 24" aria-hidden="true" style="width:58%;height:58%"><path d="M4 9.5h3.2L12 5.4v13.2L7.2 14.5H4z" fill="#fff"></path><path d="M15.2 9.2a4 4 0 0 1 0 5.6" stroke="#fff" stroke-width="1.9" stroke-linecap="round" fill="none" opacity="{{ waveOpacity }}"></path><path d="M17.8 6.9a7.4 7.4 0 0 1 0 10.2" stroke="#fff" stroke-width="1.9" stroke-linecap="round" fill="none" opacity="{{ waveOpacity }}"></path><path d="M15.2 8.4l6.4 7.2M21.6 8.4l-6.4 7.2" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="{{ muteOpacity }}"></path></svg>
+        </span>
+</button>
+
+<sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;left:50%;bottom:4%;transform:translateX(-50%);padding:.7em 1.6em;border-radius:2em;background:rgba(12,17,22,.88);border:.15em solid rgba(255,255,255,.35);color:#fff;font-family:'Trebuchet MS',sans-serif;font-size:1.9em;white-space:nowrap;animation:s2Toast 2.2s ease forwards">{{ toast }}</div>
+</sc-if>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;bgmVolume&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:45,&quot;min&quot;:0,&quot;max&quot;:100,&quot;step&quot;:5,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Audio&quot;},&quot;sfxVolume&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:70,&quot;min&quot;:0,&quot;max&quot;:100,&quot;step&quot;:5,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Audio&quot;},&quot;startMuted&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Audio&quot;}}">
+const A=window.A||function(p){var r=window.__resources;return (r&&r[p])||p;};
+const PROFESI = [
+  { id: 'mandor', title: 'Mandor', src: 'assets/s2/p-mandor.webp', col: 0, row: 0 },
+  { id: 'surveyor', title: 'Surveyor', src: 'assets/s2/p-surveyor.webp', col: 1, row: 0 },
+  { id: 'estimator', title: 'Estimator', src: 'assets/s2/p-estimator.webp', col: 2, row: 0 },
+  { id: 'logistik', title: 'Logistik', src: 'assets/s2/p-logistik.webp', col: 3, row: 0 },
+  { id: 'pengawas', title: 'Pengawas', src: 'assets/s2/p-pengawas.webp', col: 0, row: 1 },
+  { id: 'pelaksana', title: 'Pelaksana', src: 'assets/s2/p-pelaksana.webp', col: 1, row: 1 },
+  { id: 'asisten', title: 'Asisten', src: 'assets/s2/p-asisten.webp', col: 2, row: 1 },
+  { id: 'admin', title: 'Admin Teknik', src: 'assets/s2/p-admin.webp', col: 3, row: 1 }
+];
+const COL_LEFT = ['12.9%', '27.6%', '42.4%', '57.1%'];
+const ROW_TOP = ['32.4%', '60.8%'];
+
+var LS=(function(){try{var t=window.localStorage;t.setItem('__mk','1');t.removeItem('__mk');return t;}catch(e){var m={};return{getItem:function(k){return (k in m)?m[k]:null;},setItem:function(k,v){m[k]=String(v);},removeItem:function(k){delete m[k];},clear:function(){m={};}};}})();
+function __mkHub(){try{var w=window;for(var i=0;i<8&&w.parent&&w.parent!==w;i++){w=w.parent;if(w.__mkHub&&typeof w.__mkHub==='object')return w.__mkHub;}}catch(e){}return null;}
+function __mkLoad(k){var H=__mkHub(),r=null;try{r=H?(H.store||{})[k]:sessionStorage.getItem('mk_p_'+k);return r?JSON.parse(r):null;}catch(e){return null;}}
+function __mkSave(k,v){var s;try{s=JSON.stringify(v);}catch(e){return;}var H=__mkHub();if(H){H.store=H.store||{};H.store[k]=s;}else{try{sessionStorage.setItem('mk_p_'+k,s);}catch(e){}}}
+function __mkTakeGo(){var g=__mkLoad('go');if(g)__mkSave('go',null);return g;}
+var __MK_FILES=['1. Misi Konstruksi.dc.html','2. Scene Eksplorasi.dc.html','3. Tebak Profesi.dc.html','4. Pengalaman Kerja.dc.html','5. Profesi Pertama.dc.html','6. Scene Evaluasi.dc.html'];
+var __MK_NAMES=['Panduan','Eksplorasi 8 Profesi','Tebak Profesi','Pengalaman Kerja','Profesi Pertamaku','Evaluasi'];
+function __mkChecks(){var s1=__mkLoad('s1')||{},s2=__mkLoad('s2')||{},s3=__mkLoad('s3')||{},s4=__mkLoad('s4')||{},s5=__mkLoad('s5')||{};return [!!s1.done,!!(s2.ever||(s2.learned&&s2.learned.length>=8)),!!s3.ever,!!(s4.ever||(s4.done&&s4.done.length===8&&s4.done.every(Boolean))),!!(s5.ever||(s5.xp||0)>=900)];}
+function __mkLevel(){var c=__mkChecks(),L=0;while(L<5&&c[L])L++;return L;}
+function __mkAlert(title,html){var o=document.getElementById('__mkLock');if(o)o.remove();o=document.createElement('div');o.id='__mkLock';o.style.cssText='position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(8,14,22,.62);font-family:Trebuchet MS,sans-serif';o.innerHTML='<div style="max-width:min(86vw,34em);padding:1.6em 1.9em;border-radius:1.2em;border:.25em solid #fff;background:linear-gradient(#ffd84a,#f5a406);box-shadow:0 .6em 1.6em rgba(0,0,0,.45);color:#1a1208;text-align:center;font-size:clamp(14px,1.6vw,22px)"><div style="font-weight:900;font-size:1.4em;margin-bottom:.4em">'+title+'</div><div style="line-height:1.6;margin-bottom:1em">'+html+'</div><button type="button" style="font:inherit;font-weight:900;padding:.5em 1.6em;border-radius:2em;border:.18em solid #fff;background:#2170cd;color:#fff;cursor:pointer">OKE</button></div>';o.addEventListener('click',function(e){if(e.target===o||e.target.tagName==='BUTTON')o.remove();});document.body.appendChild(o);}
+function __mkLocked(i){var L=__mkLevel();__mkAlert('Misi '+__MK_NAMES[i]+' masih terkunci','Selesaikan dulu misi <b>'+__MK_NAMES[L]+'</b>'+(L>0?' dengan <b>skor maksimal</b>':'')+' untuk membuka misi berikutnya.');}
+function __mkGoEval(){var c=__mkChecks(),m=[];c.forEach(function(v,i){if(!v)m.push(__MK_NAMES[i]);});if(!m.length){__dcGo(__MK_FILES[5]);return;}__mkAlert('Evaluasi masih terkunci','Selesaikan dulu misi berikut dengan skor maksimal:<br><b>'+m.join('<br>')+'</b>');}
+function __mkGo(i,enter){if(i>=5){__mkGoEval();return;}if(i>__mkLevel()){__mkLocked(i);return;}__mkSave('go',enter?'enter'+i:null);__dcGo(__MK_FILES[i]);}
+function __mkNav(){window.__mkReady=1;var g=function(i){return function(){__mkGo(i,true);};};return {navPanduan:g(0),navEksplorasi:g(1),navTebak:g(2),navPengalaman:g(3),navProfesi:g(4),navEvaluasi:g(5)};}
+function __mkMapUrl(p){var H=__mkHub();if(H&&H.res)return H.res(p);var r=window.__resources;return (r&&r[p])||p;}
+var __MK_MAPS=[['s2','p-maps-panduan',[[21.5,66],[36,49],[54.5,36],[71.5,55],[81,33],[93.5,28]]],['s2','p-map-eksplorasi',[[19.5,63],[34,48],[50.5,36],[65.5,54],[78.5,30],[92,27]]],['s3','p-maps-tebak',[[22,62],[36,49],[51,38],[65,49],[79.5,34],[92,28]]],['s4','p-world',[[21,66],[35.5,51],[51,40],[67,54],[80.5,35],[93,28]]],['s5','p-maps-profesi',[[21,65],[35.5,49],[51,39.5],[67,49],[81,32],[93.5,27]]]];
+function __mkMapVals(own,fn){if(own>=0&&fn&&!window.__mkEntered){window.__mkEntered=1;if(__mkLoad('go')==='enter'+own){__mkSave('go',null);setTimeout(function(){if(own===0)__mkSave('s1',{done:true});fn();},0);}}var L=__mkLevel(),m=__MK_MAPS[Math.min(L,4)],u=__mkMapUrl(['assets',m[0],m[1]+'.webp'].join('/'));return {mapSrc:u,mapBg:'url("'+u+'")',mapAllDone:L>=5,mapNodes:m[2].map(function(c,i){var open=i<=L;return {left:(c[0]-6)+'%',top:(c[1]-10.5)+'%',title:__MK_NAMES[i]+(open?'':' (terkunci)'),onClick:function(){if(!open){__mkLocked(i);return;}if(i===own&&fn){if(i===0)__mkSave('s1',{done:true});fn();}else __mkGo(i,true);}};})};}
+function __mkMuteGet(){var S=__mkHub();if(S)return S.getMuted();try{return window.localStorage.getItem('mk_bgm_muted');}catch(e){return null;}}
+function __mkMuteSet(v){var S=__mkHub();if(S)S.setMuted(v==='1');try{window.localStorage.setItem('mk_bgm_muted',v);}catch(e){}}
+function __mkBgmAudio(){var S=__mkHub();if(S)return S.proxy();var a=new Audio();var own=window.__resources||{};var u=own['assets/bgm.mp3']||own.bgm;a.src=u||'assets/bgm.mp3';if(!u&&window.parent!==window){var h=function(e){var d=e.data;if(d&&d.type==='mk:bgm'&&d.blob){window.removeEventListener('message',h);var was=!a.paused;a.src=URL.createObjectURL(d.blob);if(was){var p=a.play();if(p&&p.catch)p.catch(function(){});}}};window.addEventListener('message',h);try{window.parent.postMessage({type:'mk:bgm?'},'*');}catch(e){}}return a;}
+class Component extends DCLogic {
+  state = { view: 'map', detail: null, learned: (__mkLoad('s2') || {}).learned || [], muted: false, toast: null };
+
+  componentDidUpdate() { __mkSave('s2', { learned: this.state.learned, ever: !!((__mkLoad('s2') || {}).ever || this.state.learned.length >= 8) }); }
+  componentDidMount() {
+    const stored = __mkMuteGet();
+    const muted = stored === null ? !!this.props.startMuted : stored === '1';
+    const a = __mkBgmAudio();
+    a.loop = true;
+    a.volume = (this.props.bgmVolume ?? 45) / 100;
+    const t = parseFloat(LS.getItem('mk_bgm_time') || '0');
+    if (t > 0) a.currentTime = t;
+    this.audio = a;
+    this.saver = setInterval(() => { if (!a.paused) LS.setItem('mk_bgm_time', String(a.currentTime)); }, 2000);
+    this.setState({ muted });
+    if (!muted) a.play().catch(() => {
+      const kick = () => { if (!this.state.muted) a.play().catch(() => {}); window.removeEventListener('pointerdown', kick); window.removeEventListener('keydown', kick); };
+      window.addEventListener('pointerdown', kick); window.addEventListener('keydown', kick);
+    });
+    this.onKey = (e) => {
+      if (e.key !== 'Escape') return;
+      if (this.state.detail) this.back(); else if (this.state.view === 'shelf') this.goMaps();
+    };
+    window.addEventListener('keydown', this.onKey);
+    PROFESI.forEach(p => { const im = new Image(); im.src = A(p.src); });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.saver);
+    clearTimeout(this._toast);
+    window.removeEventListener('keydown', this.onKey);
+    if (this.audio) { this.audio.pause(); this.audio.src = ''; }
+  }
+
+  ctx() {
+    if (!this._ctx) { const AC = window.AudioContext || window.webkitAudioContext; this._ctx = new AC(); }
+    if (this._ctx.state === 'suspended') this._ctx.resume();
+    return this._ctx;
+  }
+
+  sfx(kind) {
+    const c = this.ctx(), t = c.currentTime, g = c.createGain();
+    g.connect(c.destination);
+    const vol = 0.16 * ((this.props.sfxVolume ?? 70) / 100);
+    if (kind === 'close') {
+      const o = c.createOscillator(); o.type = 'triangle';
+      o.frequency.setValueAtTime(520, t); o.frequency.exponentialRampToValueAtTime(200, t + 0.16);
+      g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.18);
+      o.connect(g); o.start(t); o.stop(t + 0.2);
+    } else if (kind === 'done') {
+      [523, 659, 784, 1047].forEach((f, i) => {
+        const o = c.createOscillator(), gg = c.createGain();
+        o.type = 'triangle'; o.frequency.value = f;
+        const s = t + i * 0.11;
+        gg.gain.setValueAtTime(0.0001, s); gg.gain.exponentialRampToValueAtTime(vol, s + 0.02);
+        gg.gain.exponentialRampToValueAtTime(0.0001, s + 0.32);
+        o.connect(gg); gg.connect(c.destination); o.start(s); o.stop(s + 0.34);
+      });
+    } else {
+      const o = c.createOscillator(), o2 = c.createOscillator();
+      o.type = 'square'; o2.type = 'sine';
+      o.frequency.setValueAtTime(660, t); o.frequency.exponentialRampToValueAtTime(880, t + 0.07);
+      o2.frequency.setValueAtTime(1320, t);
+      g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.14);
+      o.connect(g); o2.connect(g);
+      o.start(t); o2.start(t); o.stop(t + 0.15); o2.stop(t + 0.1);
+    }
+  }
+
+  showToast(msg) {
+    this.setState({ toast: msg });
+    clearTimeout(this._toast);
+    this._toast = setTimeout(() => this.setState({ toast: null }), 2200);
+  }
+
+  back = () => {
+    this.sfx('close');
+    const id = this.state.detail;
+    const learned = this.state.learned.includes(id) ? this.state.learned : this.state.learned.concat(id);
+    const justFinished = learned.length === PROFESI.length && this.state.learned.length < PROFESI.length;
+    this.setState({ detail: null, learned });
+    if (justFinished) { setTimeout(() => this.sfx('done'), 250); this.showToast('Semua profesi dipelajari! Tombol Selanjutnya terbuka.'); }
+  };
+
+  goMaps = () => { this.sfx('close'); this.setState({ view: 'map', detail: null }); };
+
+  renderVals(){ const r = this._rv(); return Object.assign(__mkNav(), r, __mkMapVals(1, r.onExplore)); }
+  _rv() {
+    const learned = this.state.learned;
+    const allDone = learned.length === PROFESI.length;
+    return {
+      isMap: this.state.view === 'map' && !this.state.detail,
+      isShelf: this.state.view === 'shelf' && !this.state.detail,
+      detailSrc: this.state.detail ? A(PROFESI.find(p => p.id === this.state.detail).src) : null,
+      detailCss: this.state.detail ? `url(${A(PROFESI.find(p => p.id === this.state.detail).src)})` : 'none',
+      doneOpacity: allDone ? 1 : 0,
+      allDone,
+      progressLabel: learned.length + ' / ' + PROFESI.length + ' profesi dipelajari',
+      toast: this.state.toast,
+      waveOpacity: this.state.muted ? 0 : 1,
+      muteOpacity: this.state.muted ? 1 : 0,
+      speakerDisplay: 'none',
+      speakerLeft: this.state.view === 'map' ? '84.6%' : '76.3%',
+      speakerTop: this.state.view === 'map' ? '4.8%' : '5.6%',
+      speakerWidth: this.state.view === 'map' ? '5.6%' : '6.2%',
+      speakerHeight: this.state.view === 'map' ? '12%' : '9.3%',
+      shelfBgCss: 'url(' + A(learned.length === PROFESI.length ? 'assets/s2/p-shelf-2.webp' : 'assets/s2/p-shelf-1.webp') + ')',
+      cards: PROFESI.map(p => ({
+        title: p.title,
+        left: COL_LEFT[p.col],
+        bg: `url(${A('assets/s2/card-'+p.id+'.webp')})`,
+        top: ROW_TOP[p.row],
+        checkDisplay: learned.includes(p.id) ? 'flex' : 'none',
+        open: () => { this.sfx('click'); this.setState({ detail: p.id }); }
+      })),
+      onExplore: () => { this.sfx('click'); this.setState({ view: 'shelf' }); },
+      onBackToShelf: this.back,
+      onMaps: this.goMaps,
+      onHome: () => { this.sfx('click'); __dcGo('1. Misi Konstruksi.dc.html'); },
+      onNext: () => { this.sfx('click'); __mkGo(2); },
+      toggleMusic: () => {
+        this.sfx('click');
+        const muted = !this.state.muted;
+        this.setState({ muted });
+        __mkMuteSet(muted ? '1' : '0');
+        if (this.audio) { if (muted) this.audio.pause(); else this.audio.play().catch(() => {}); }
+        this.showToast(muted ? 'Musik latar: nonaktif' : 'Musik latar: aktif');
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

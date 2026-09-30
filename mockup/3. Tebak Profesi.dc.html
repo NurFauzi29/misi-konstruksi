@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="ext-resource-dependency" content="assets/s3/p-card3-mandor.webp" data-resource-id="assets/s3/p-card3-mandor.webp">
+<meta name="ext-resource-dependency" content="assets/s3/p-card3-surveyor.webp" data-resource-id="assets/s3/p-card3-surveyor.webp">
+<meta name="ext-resource-dependency" content="assets/s3/p-card3-estimator.webp" data-resource-id="assets/s3/p-card3-estimator.webp">
+<meta name="ext-resource-dependency" content="assets/s3/p-card3-logistik.webp" data-resource-id="assets/s3/p-card3-logistik.webp">
+<meta name="ext-resource-dependency" content="assets/s3/p-card3-pengawas.webp" data-resource-id="assets/s3/p-card3-pengawas.webp">
+<meta name="ext-resource-dependency" content="assets/s3/p-card3-pelaksana.webp" data-resource-id="assets/s3/p-card3-pelaksana.webp">
+<meta name="ext-resource-dependency" content="assets/s3/p-card3-asisten.webp" data-resource-id="assets/s3/p-card3-asisten.webp">
+<meta name="ext-resource-dependency" content="assets/s3/p-card3-admin.webp" data-resource-id="assets/s3/p-card3-admin.webp">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+html,body{margin:0;padding:0;background:#0c1116;overflow:hidden;height:100%}
+@keyframes tpFade{from{opacity:0}to{opacity:1}}
+@keyframes tpPop{0%{transform:scale(.9);opacity:0}60%{transform:scale(1.03);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes tpPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,214,26,.85)}70%{box-shadow:0 0 0 1.2em rgba(255,214,26,0)}}
+@keyframes tpDrop{0%{transform:scale(.82);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes tpToast{0%{transform:translate(-50%,1em);opacity:0}12%{transform:translate(-50%,0);opacity:1}80%{opacity:1}100%{opacity:0}}
+a{color:#f4ab03}a:hover{color:#ffd257}
+</style>
+<script>
+window.__dcGo = function (path) {
+  var url = encodeURI(path);
+  var embedded = false;
+  try { embedded = !!(window.parent && window.parent !== window); } catch (e) {}
+  try { if (embedded) window.parent.postMessage({ type: 'omelette:navigate', path: path, file: path, url: url }, '*'); } catch (e) {}
+  if (embedded && window.__mkShell) return;
+  try { if (window.top && window.top !== window) { window.top.location.href = url; return; } } catch (e) {}
+  window.location.href = url;
+};
+try { if (window.parent && window.parent !== window && window.parent.__mkShellHost) window.__mkShell = true; } catch (e) {}
+</script>
+</helmet>
+<template id="__bundler_thumbnail" data-bg-color="#0c1116"><svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="800" fill="#0c1116"/></svg></template>
+<div style="width:100%;height:100vh;display:flex;align-items:center;justify-content:center;background:#0c1116">
+<div style="position:relative;width:min(100vw,177.78vh);height:min(56.25vw,100vh);font-size:min(1vw,1.7778vh);overflow:hidden;background:#f7f1e4;box-shadow:0 0 4em rgba(0,0,0,.6);touch-action:none;user-select:none" onPointerMove="{{ onMove }}" onPointerUp="{{ onUp }}" onPointerCancel="{{ onUp }}">
+
+<sc-if value="{{ isMap }}" hint-placeholder-val="{{ true }}">
+  <div style="position:absolute;inset:0;animation:tpFade .25s ease both">
+    <img src="{{ mapSrc }}" alt="Peta misi — Tebak Profesi terbuka" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+    <sc-for list="{{ mapNodes }}" as="n" hint-placeholder-count="0"><button type="button" onClick="{{ n.onClick }}" title="{{ n.title }}" style="position:absolute;left:{{ n.left }};top:{{ n.top }};width:12%;height:25%;padding:0;border:0;border-radius:1.4em;background:transparent;cursor:pointer;transition:transform .16s ease" style-hover="transform:scale(1.05)" style-active="transform:scale(.97)"></button></sc-for>
+    <sc-if value="{{ mapAllDone }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:84.3%;top:19%;width:3.6%;aspect-ratio:1;border-radius:50%;background:#2e9c3a;border:.25em solid #fff;display:flex;align-items:center;justify-content:center;box-shadow:0 .2em .4em rgba(0,0,0,.35);pointer-events:none"><svg viewBox="0 0 24 24" aria-hidden="true" style="width:62%;height:62%"><path d="M5 12.5l4.2 4.2L19 7" stroke="#fff" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></sc-if>
+    <div style="position:absolute;right:1.6%;top:2.1%;display:flex;gap:.7em">
+      <button type="button" onClick="{{ toggleMusic }}" title="Nyalakan / matikan musik" style="width:4.4em;height:4.4em;flex:none;display:flex;align-items:center;justify-content:center;padding:0;border-radius:50%;border:.22em solid #fff;background:linear-gradient(#5aa9f2,#2170cd 62%,#175aa8);box-shadow:0 .28em .45em rgba(0,0,0,.4),inset 0 -.28em .45em rgba(0,0,0,.22);cursor:pointer;transition:transform .15s ease" style-hover="transform:scale(1.07)" style-active="transform:scale(.95)">
+        <svg viewBox="0 0 24 24" aria-hidden="true" style="width:58%;height:58%"><path d="M4 9.5h3.2L12 5.4v13.2L7.2 14.5H4z" fill="#fff"></path><path d="M15.2 9.2a4 4 0 0 1 0 5.6" stroke="#fff" stroke-width="1.9" stroke-linecap="round" fill="none" opacity="{{ waveOpacity }}"></path><path d="M17.8 6.9a7.4 7.4 0 0 1 0 10.2" stroke="#fff" stroke-width="1.9" stroke-linecap="round" fill="none" opacity="{{ waveOpacity }}"></path><path d="M15.2 8.4l6.4 7.2M21.6 8.4l-6.4 7.2" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="{{ muteOpacity }}"></path></svg>
+      </button>
+      <button type="button" onClick="{{ onHome }}" title="Kembali ke Home" style="width:4.4em;height:4.4em;flex:none;display:flex;align-items:center;justify-content:center;padding:0;border-radius:50%;border:.22em solid #fff;background:linear-gradient(#ffb23e,#f57c00 62%,#cf5a00);box-shadow:0 .28em .45em rgba(0,0,0,.4),inset 0 -.28em .45em rgba(0,0,0,.22);cursor:pointer;transition:transform .15s ease" style-hover="transform:scale(1.07)" style-active="transform:scale(.95)">
+        <svg viewBox="0 0 24 24" aria-hidden="true" style="width:58%;height:58%"><path d="M12 3.2 2.8 11h2.5v9.4h5.1v-5.6h3.2v5.6h5.1V11h2.5z" fill="#fff"></path></svg>
+      </button>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isGame }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;display:flex;gap:1.1em;padding:1.2em;box-sizing:border-box;background:#f7f1e4;animation:tpFade .25s ease both;font-family:'Trebuchet MS',sans-serif">
+
+  <div style="flex:1 1 0;display:flex;flex-direction:column;gap:.55em;min-width:0">
+    <div style="display:flex;align-items:center;gap:1em;padding:.7em 1.2em;border-radius:.9em;background:linear-gradient(#f0dcae,#e3c489);border:.28em solid #8a5a24;box-shadow:0 .3em .5em rgba(0,0,0,.22),inset 0 .2em 0 rgba(255,255,255,.45)">
+      <div style="flex:1 1 auto;min-width:0">
+        <div style="font-size:3.1em;font-weight:800;letter-spacing:.02em;color:#123a6b;line-height:1">TEBAK PROFESI</div>
+        <div style="margin-top:.35em;display:inline-block;padding:.28em .7em;border-radius:.4em;background:#f4b81c;border:.14em solid #b07708;color:#22303f;font-size:1.12em;font-weight:700;letter-spacing:.01em;white-space:nowrap">COCOKKAN JOBDESK DENGAN PROFESI YANG TEPAT!</div>
+      </div>
+    </div>
+
+    <div style="flex:1 1 0;display:flex;flex-direction:column;gap:.42em;min-height:0">
+      <sc-for list="{{ rows }}" as="row" hint-placeholder-count="8">
+        <div style="flex:1 1 0;display:flex;align-items:stretch;gap:.7em;padding:.35em 1em;border-radius:.7em;background:#fff;border:.14em solid rgba(18,58,107,.14);box-shadow:0 .16em .3em rgba(0,0,0,.08);min-height:0">
+          <div style="flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;gap:.15em;min-width:0;color:#2b3a4a;font-size:1.28em;line-height:1.22;text-wrap:pretty">
+            <div>• {{ row.l1 }}</div>
+            <div>• {{ row.l2 }}</div>
+          </div>
+          <button type="button" onClick="{{ row.onZone }}" ref="{{ row.zoneRef }}" title="Kotak jawaban" style="flex:none;position:relative;width:12.2em;display:flex;align-items:center;justify-content:center;gap:.4em;padding:.15em .3em;overflow:hidden;box-sizing:border-box;border-radius:.6em;cursor:pointer;transition:border-color .15s ease,background .15s ease;border:.18em dashed {{ row.zoneBorder }};background:{{ row.zoneBg }}">
+            <sc-if value="{{ row.hasCard }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;align-items:center;gap:.4em;min-width:0;animation:tpDrop .2s ease both">
+                <div style="flex:none;width:2.3em;height:2.3em;border-radius:.3em;border:.1em solid #fff;box-shadow:0 .12em .25em rgba(0,0,0,.25);background-size:cover;background-position:center;background-image:{{ row.cardBg }}"></div>
+                <div style="display:flex;flex-direction:column;align-items:flex-start;min-width:0">
+                  <div style="font-size:1em;font-weight:800;letter-spacing:.01em;white-space:nowrap;line-height:1.15;color:{{ row.cardColor }}">{{ row.cardName }}</div>
+                  <sc-if value="{{ row.statusShow }}" hint-placeholder-val="{{ false }}">
+                    <div style="font-size:.78em;font-weight:800;letter-spacing:.08em;white-space:nowrap;line-height:1.15;color:{{ row.statusColor }}">{{ row.statusText }}</div>
+                  </sc-if>
+                </div>
+              </div>
+            </sc-if>
+          </button>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="flex:0 0 42%;display:flex;flex-direction:column;gap:.7em;min-width:0">
+    <div style="padding:.7em 1.2em;border-radius:.9em;background:linear-gradient(#f0dcae,#e3c489);border:.28em solid #8a5a24;box-shadow:0 .3em .5em rgba(0,0,0,.22),inset 0 .2em 0 rgba(255,255,255,.45);text-align:center">
+      <div style="font-size:2.7em;font-weight:800;color:#123a6b;line-height:1">PILIH PROFESI</div>
+      <div style="margin-top:.3em;display:inline-block;padding:.26em .7em;border-radius:.4em;background:#f4b81c;border:.14em solid #b07708;color:#22303f;font-size:1.2em;font-weight:700">Seret ikon profesi, lalu letakkan di kotak jobdesk yang sesuai</div>
+    </div>
+
+    <div style="flex:1 1 auto;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,auto);gap:.7em;min-height:0;align-content:center;justify-items:center">
+      <sc-for list="{{ cards }}" as="card" hint-placeholder-count="8">
+        <div onPointerDown="{{ card.onDown }}" onClick="{{ card.onClick }}" title="{{ card.name }}" style="position:relative;width:84%;aspect-ratio:368/487;display:flex;flex-direction:column;border-radius:1em;overflow:hidden;background:transparent;border:.2em solid {{ card.border }};filter:drop-shadow(0 .2em .3em rgba(0,0,0,.2));cursor:grab;transition:transform .14s ease,box-shadow .14s ease;opacity:{{ card.opacity }};visibility:{{ card.vis }}" style-hover="transform:scale(1.045);box-shadow:0 .4em .7em rgba(0,0,0,.28)" style-active="transform:scale(.98)">
+          <div style="width:100%;flex:1 1 auto;min-height:0;background-size:cover;background-position:center;pointer-events:none;background-image:{{ card.bg }}"></div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="flex:none;display:flex;align-items:center;gap:.8em">
+      <button type="button" onClick="{{ onReset }}" style="flex:none;padding:.75em 1.4em;border-radius:.7em;border:.18em solid #b07708;background:linear-gradient(#fff6e2,#f0dcae);color:#8a5a24;font-family:inherit;font-size:1.35em;font-weight:800;letter-spacing:.04em;cursor:pointer;box-shadow:0 .25em .4em rgba(0,0,0,.2);transition:transform .14s ease" style-hover="transform:translateY(-.08em)" style-active="transform:translateY(.08em)">RESET</button>
+      <button type="button" onClick="{{ onCheck }}" style="flex:1 1 auto;padding:.8em 1.4em;border-radius:.8em;border:.2em solid #7d8a99;background:linear-gradient(#f2f4f7,#c3ccd6 62%,#aab6c2);color:#123a6b;font-family:inherit;font-size:1.7em;font-weight:800;letter-spacing:.05em;cursor:pointer;box-shadow:0 .3em .5em rgba(0,0,0,.28),inset 0 .18em 0 rgba(255,255,255,.5);transition:transform .14s ease,filter .14s ease;filter:{{ checkFilter }}" style-hover="transform:translateY(-.08em)" style-active="transform:translateY(.08em)">PERIKSA JAWABAN</button>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ dragImg }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;z-index:60;width:7em;height:7em;background-size:cover;background-position:center;border-radius:.6em;border:.2em solid #fff;box-shadow:0 .6em 1em rgba(0,0,0,.45);pointer-events:none;transform:translate(-50%,-50%) scale(1.06);background-image:{{ dragBg }};left:{{ dragX }};top:{{ dragY }}"></div>
+</sc-if>
+
+<sc-if value="{{ result }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;background:rgba(10,18,32,.72);animation:tpFade .2s ease both;font-family:'Trebuchet MS',sans-serif">
+    <div style="width:38em;padding:2em 2.2em;border-radius:1.2em;background:linear-gradient(#fffdf6,#f4e7cc);border:.35em solid #8a5a24;box-shadow:0 1em 2em rgba(0,0,0,.45);text-align:center;animation:tpPop .32s cubic-bezier(.2,1.3,.4,1) both">
+      <div style="font-size:2.5em;font-weight:800;color:#123a6b;line-height:1.1">HASIL PERMAINAN</div>
+      <div style="margin-top:1.1em;display:flex;gap:.8em;justify-content:center">
+        <div style="flex:1 1 0;padding:.7em .4em;border-radius:.7em;background:#e8f7e0;border:.16em solid #4f9b1b">
+          <div style="font-size:1.1em;font-weight:700;color:#3d7a12;letter-spacing:.06em">BENAR</div>
+          <div style="font-size:2.6em;font-weight:800;color:#3d7a12;line-height:1.1">{{ result.right }}</div>
+        </div>
+        <div style="flex:1 1 0;padding:.7em .4em;border-radius:.7em;background:#fdeaea;border:.16em solid #c1272d">
+          <div style="font-size:1.1em;font-weight:700;color:#c1272d;letter-spacing:.06em">SALAH</div>
+          <div style="font-size:2.6em;font-weight:800;color:#c1272d;line-height:1.1">{{ result.wrong }}</div>
+        </div>
+        <div style="flex:1 1 0;padding:.7em .4em;border-radius:.7em;background:#123a6b;border:.16em solid #0b2444">
+          <div style="font-size:1.1em;font-weight:700;color:#ffd11a;letter-spacing:.06em">SKOR</div>
+          <div style="font-size:2.6em;font-weight:800;color:#ffd11a;line-height:1.1">{{ result.score }}</div>
+        </div>
+      </div>
+      <div style="margin-top:1em;font-size:1.35em;color:#3a4a5a">{{ result.note }}</div>
+      <div style="margin-top:1.4em;display:flex;gap:.8em;justify-content:center">
+        <button type="button" onClick="{{ onRetry }}" style="padding:.7em 1.4em;border-radius:.7em;border:.18em solid #7c5a2a;background:linear-gradient(#fff6e2,#e9d6b0);color:#6b4a1c;font-family:inherit;font-size:1.4em;font-weight:800;letter-spacing:.04em;cursor:pointer;box-shadow:0 .25em .4em rgba(0,0,0,.2)">COBA LAGI</button>
+        <button type="button" onClick="{{ onNext }}" style="padding:.7em 1.6em;border-radius:.7em;border:.2em solid #b07708;background:linear-gradient(#ffd75e,#f5a406);color:#3a2a06;font-family:inherit;font-size:1.4em;font-weight:800;letter-spacing:.04em;cursor:pointer;box-shadow:0 .3em .5em rgba(0,0,0,.28),inset 0 .16em 0 rgba(255,255,255,.5)">SELANJUTNYA →</button>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;left:50%;bottom:4%;z-index:70;transform:translateX(-50%);padding:.7em 1.6em;border-radius:2em;background:rgba(12,17,22,.9);border:.15em solid rgba(255,255,255,.35);color:#fff;font-family:'Trebuchet MS',sans-serif;font-size:1.8em;white-space:nowrap;animation:tpToast 2.4s ease forwards">{{ toast }}</div>
+</sc-if>
+
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;bgmVolume&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:45,&quot;min&quot;:0,&quot;max&quot;:100,&quot;step&quot;:5,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Audio&quot;},&quot;sfxVolume&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:70,&quot;min&quot;:0,&quot;max&quot;:100,&quot;step&quot;:5,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Audio&quot;},&quot;startMuted&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Audio&quot;}}">
+const A=window.A||function(p){var r=window.__resources;return (r&&r[p])||p;};
+const PROFESI = [
+  { id: 'pengawas', name: 'PENGAWAS', color: '#e23b30', img: 'assets/s3/p-card3-pengawas.webp' },
+  { id: 'surveyor', name: 'SURVEYOR', color: '#4caf50', img: 'assets/s3/p-card3-surveyor.webp' },
+  { id: 'admin', name: 'ADMIN TEKNIK', color: '#8a5cd6', img: 'assets/s3/p-card3-admin.webp' },
+  { id: 'estimator', name: 'ESTIMATOR', color: '#f0b400', img: 'assets/s3/p-card3-estimator.webp' },
+  { id: 'logistik', name: 'LOGISTIK', color: '#2b8fe0', img: 'assets/s3/p-card3-logistik.webp' },
+  { id: 'mandor', name: 'MANDOR', color: '#f0872a', img: 'assets/s3/p-card3-mandor.webp' },
+  { id: 'pelaksana', name: 'PELAKSANA', color: '#8a5a33', img: 'assets/s3/p-card3-pelaksana.webp' },
+  { id: 'asisten', name: 'ASISTEN', color: '#24c4b8', img: 'assets/s3/p-card3-asisten.webp' }
+];
+const JOBS = [
+  { n: 1, ans: 'admin', l1: 'Mengelola dokumen dan data teknis proyek', l2: 'Membuat surat, laporan, dan arsip proyek' },
+  { n: 2, ans: 'pelaksana', l1: 'Melaksanakan pekerjaan konstruksi sesuai gambar kerja', l2: 'Mengerjakan tugas teknis di lapangan' },
+  { n: 3, ans: 'pengawas', l1: 'Mengawasi jalannya pekerjaan di lapangan', l2: 'Memastikan mutu, waktu, dan biaya sesuai rencana' },
+  { n: 4, ans: 'estimator', l1: 'Menghitung kebutuhan biaya, bahan, dan tenaga kerja', l2: 'Membuat RAB (Rencana Anggaran Biaya) proyek' },
+  { n: 5, ans: 'mandor', l1: 'Memimpin dan mengarahkan pekerja di lapangan', l2: 'Memastikan pekerjaan sesuai rencana dan target' },
+  { n: 6, ans: 'surveyor', l1: 'Melakukan pengukuran dan pemetaan di lapangan', l2: 'Menyediakan data untuk perencanaan dan pelaksanaan' },
+  { n: 7, ans: 'asisten', l1: 'Membantu pelaksana dan pengawas di lapangan', l2: 'Membuat laporan harian dan dokumentasi proyek' },
+  { n: 8, ans: 'logistik', l1: 'Mengatur pengadaan dan distribusi bahan & peralatan', l2: 'Memastikan ketersediaan logistik tepat waktu' }
+];
+const prof = id => PROFESI.find(p => p.id === id);
+
+var LS=(function(){try{var t=window.localStorage;t.setItem('__mk','1');t.removeItem('__mk');return t;}catch(e){var m={};return{getItem:function(k){return (k in m)?m[k]:null;},setItem:function(k,v){m[k]=String(v);},removeItem:function(k){delete m[k];},clear:function(){m={};}};}})();
+function __mkHub(){try{var w=window;for(var i=0;i<8&&w.parent&&w.parent!==w;i++){w=w.parent;if(w.__mkHub&&typeof w.__mkHub==='object')return w.__mkHub;}}catch(e){}return null;}
+function __mkLoad(k){var H=__mkHub(),r=null;try{r=H?(H.store||{})[k]:sessionStorage.getItem('mk_p_'+k);return r?JSON.parse(r):null;}catch(e){return null;}}
+function __mkSave(k,v){var s;try{s=JSON.stringify(v);}catch(e){return;}var H=__mkHub();if(H){H.store=H.store||{};H.store[k]=s;}else{try{sessionStorage.setItem('mk_p_'+k,s);}catch(e){}}}
+function __mkTakeGo(){var g=__mkLoad('go');if(g)__mkSave('go',null);return g;}
+var __MK_FILES=['1. Misi Konstruksi.dc.html','2. Scene Eksplorasi.dc.html','3. Tebak Profesi.dc.html','4. Pengalaman Kerja.dc.html','5. Profesi Pertama.dc.html','6. Scene Evaluasi.dc.html'];
+var __MK_NAMES=['Panduan','Eksplorasi 8 Profesi','Tebak Profesi','Pengalaman Kerja','Profesi Pertamaku','Evaluasi'];
+function __mkChecks(){var s1=__mkLoad('s1')||{},s2=__mkLoad('s2')||{},s3=__mkLoad('s3')||{},s4=__mkLoad('s4')||{},s5=__mkLoad('s5')||{};return [!!s1.done,!!(s2.ever||(s2.learned&&s2.learned.length>=8)),!!s3.ever,!!(s4.ever||(s4.done&&s4.done.length===8&&s4.done.every(Boolean))),!!(s5.ever||(s5.xp||0)>=900)];}
+function __mkLevel(){var c=__mkChecks(),L=0;while(L<5&&c[L])L++;return L;}
+function __mkAlert(title,html){var o=document.getElementById('__mkLock');if(o)o.remove();o=document.createElement('div');o.id='__mkLock';o.style.cssText='position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(8,14,22,.62);font-family:Trebuchet MS,sans-serif';o.innerHTML='<div style="max-width:min(86vw,34em);padding:1.6em 1.9em;border-radius:1.2em;border:.25em solid #fff;background:linear-gradient(#ffd84a,#f5a406);box-shadow:0 .6em 1.6em rgba(0,0,0,.45);color:#1a1208;text-align:center;font-size:clamp(14px,1.6vw,22px)"><div style="font-weight:900;font-size:1.4em;margin-bottom:.4em">'+title+'</div><div style="line-height:1.6;margin-bottom:1em">'+html+'</div><button type="button" style="font:inherit;font-weight:900;padding:.5em 1.6em;border-radius:2em;border:.18em solid #fff;background:#2170cd;color:#fff;cursor:pointer">OKE</button></div>';o.addEventListener('click',function(e){if(e.target===o||e.target.tagName==='BUTTON')o.remove();});document.body.appendChild(o);}
+function __mkLocked(i){var L=__mkLevel();__mkAlert('Misi '+__MK_NAMES[i]+' masih terkunci','Selesaikan dulu misi <b>'+__MK_NAMES[L]+'</b>'+(L>0?' dengan <b>skor maksimal</b>':'')+' untuk membuka misi berikutnya.');}
+function __mkGoEval(){var c=__mkChecks(),m=[];c.forEach(function(v,i){if(!v)m.push(__MK_NAMES[i]);});if(!m.length){__dcGo(__MK_FILES[5]);return;}__mkAlert('Evaluasi masih terkunci','Selesaikan dulu misi berikut dengan skor maksimal:<br><b>'+m.join('<br>')+'</b>');}
+function __mkGo(i,enter){if(i>=5){__mkGoEval();return;}if(i>__mkLevel()){__mkLocked(i);return;}__mkSave('go',enter?'enter'+i:null);__dcGo(__MK_FILES[i]);}
+function __mkNav(){window.__mkReady=1;var g=function(i){return function(){__mkGo(i,true);};};return {navPanduan:g(0),navEksplorasi:g(1),navTebak:g(2),navPengalaman:g(3),navProfesi:g(4),navEvaluasi:g(5)};}
+function __mkMapUrl(p){var H=__mkHub();if(H&&H.res)return H.res(p);var r=window.__resources;return (r&&r[p])||p;}
+var __MK_MAPS=[['s2','p-maps-panduan',[[21.5,66],[36,49],[54.5,36],[71.5,55],[81,33],[93.5,28]]],['s2','p-map-eksplorasi',[[19.5,63],[34,48],[50.5,36],[65.5,54],[78.5,30],[92,27]]],['s3','p-maps-tebak',[[22,62],[36,49],[51,38],[65,49],[79.5,34],[92,28]]],['s4','p-world',[[21,66],[35.5,51],[51,40],[67,54],[80.5,35],[93,28]]],['s5','p-maps-profesi',[[21,65],[35.5,49],[51,39.5],[67,49],[81,32],[93.5,27]]]];
+function __mkMapVals(own,fn){if(own>=0&&fn&&!window.__mkEntered){window.__mkEntered=1;if(__mkLoad('go')==='enter'+own){__mkSave('go',null);setTimeout(function(){if(own===0)__mkSave('s1',{done:true});fn();},0);}}var L=__mkLevel(),m=__MK_MAPS[Math.min(L,4)],u=__mkMapUrl(['assets',m[0],m[1]+'.webp'].join('/'));return {mapSrc:u,mapBg:'url("'+u+'")',mapAllDone:L>=5,mapNodes:m[2].map(function(c,i){var open=i<=L;return {left:(c[0]-6)+'%',top:(c[1]-10.5)+'%',title:__MK_NAMES[i]+(open?'':' (terkunci)'),onClick:function(){if(!open){__mkLocked(i);return;}if(i===own&&fn){if(i===0)__mkSave('s1',{done:true});fn();}else __mkGo(i,true);}};})};}
+function __mkMuteGet(){var S=__mkHub();if(S)return S.getMuted();try{return window.localStorage.getItem('mk_bgm_muted');}catch(e){return null;}}
+function __mkMuteSet(v){var S=__mkHub();if(S)S.setMuted(v==='1');try{window.localStorage.setItem('mk_bgm_muted',v);}catch(e){}}
+function __mkBgmAudio(){var S=__mkHub();if(S)return S.proxy();var a=new Audio();var own=window.__resources||{};var u=own['assets/bgm.mp3']||own.bgm;a.src=u||'assets/bgm.mp3';if(!u&&window.parent!==window){var h=function(e){var d=e.data;if(d&&d.type==='mk:bgm'&&d.blob){window.removeEventListener('message',h);var was=!a.paused;a.src=URL.createObjectURL(d.blob);if(was){var p=a.play();if(p&&p.catch)p.catch(function(){});}}};window.addEventListener('message',h);try{window.parent.postMessage({type:'mk:bgm?'},'*');}catch(e){}}return a;}
+class Component extends DCLogic {
+  zones = {};
+  state = { view: 'map', place: (__mkLoad('s3') || {}).place || {}, selected: null, drag: null, checked: !!(__mkLoad('s3') || {}).checked, result: null, hoverZone: null, muted: false, toast: null };
+
+  componentDidUpdate() { __mkSave('s3', { place: this.state.place, checked: this.state.checked, ever: !!((__mkLoad('s3') || {}).ever || (this.state.result && this.state.result.right === 8)) }); }
+  componentDidMount() {
+    const stored = __mkMuteGet();
+    const muted = stored === null ? !!this.props.startMuted : stored === '1';
+    const a = __mkBgmAudio();
+    a.loop = true;
+    a.volume = (this.props.bgmVolume ?? 45) / 100;
+    const t = parseFloat(LS.getItem('mk_bgm_time') || '0');
+    if (t > 0) a.currentTime = t;
+    this.audio = a;
+    this.saver = setInterval(() => { if (!a.paused) LS.setItem('mk_bgm_time', String(a.currentTime)); }, 2000);
+    this.setState({ muted });
+    if (!muted) a.play().catch(() => {
+      const kick = () => { if (!this.state.muted) a.play().catch(() => {}); window.removeEventListener('pointerdown', kick); window.removeEventListener('keydown', kick); };
+      window.addEventListener('pointerdown', kick); window.addEventListener('keydown', kick);
+    });
+    this.zones = {};
+    this.onKey = (e) => { if (e.key === 'Escape') { if (this.state.result) this.setState({ result: null }); else if (this.state.view === 'game') this.setState({ view: 'map' }); } };
+    window.addEventListener('keydown', this.onKey);
+    PROFESI.forEach(p => { const im = new Image(); im.src = A(p.img); });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.saver);
+    clearTimeout(this._toast);
+    window.removeEventListener('keydown', this.onKey);
+    if (this.audio) { this.audio.pause(); this.audio.src = ''; }
+  }
+
+  ctx() {
+    if (!this._ctx) { const AC = window.AudioContext || window.webkitAudioContext; this._ctx = new AC(); }
+    if (this._ctx.state === 'suspended') this._ctx.resume();
+    return this._ctx;
+  }
+
+  sfx(kind) {
+    const c = this.ctx(), t = c.currentTime, g = c.createGain();
+    g.connect(c.destination);
+    const vol = 0.16 * ((this.props.sfxVolume ?? 70) / 100);
+    if (kind === 'drop') {
+      const o = c.createOscillator(); o.type = 'triangle';
+      o.frequency.setValueAtTime(300, t); o.frequency.exponentialRampToValueAtTime(520, t + 0.09);
+      g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.14);
+      o.connect(g); o.start(t); o.stop(t + 0.16);
+    } else if (kind === 'close') {
+      const o = c.createOscillator(); o.type = 'triangle';
+      o.frequency.setValueAtTime(520, t); o.frequency.exponentialRampToValueAtTime(200, t + 0.16);
+      g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.18);
+      o.connect(g); o.start(t); o.stop(t + 0.2);
+    } else if (kind === 'done') {
+      [523, 659, 784, 1047].forEach((f, i) => {
+        const o = c.createOscillator(), gg = c.createGain();
+        o.type = 'triangle'; o.frequency.value = f;
+        const s = t + i * 0.11;
+        gg.gain.setValueAtTime(0.0001, s); gg.gain.exponentialRampToValueAtTime(vol, s + 0.02);
+        gg.gain.exponentialRampToValueAtTime(0.0001, s + 0.32);
+        o.connect(gg); gg.connect(c.destination); o.start(s); o.stop(s + 0.34);
+      });
+    } else {
+      const o = c.createOscillator(), o2 = c.createOscillator();
+      o.type = 'square'; o2.type = 'sine';
+      o.frequency.setValueAtTime(660, t); o.frequency.exponentialRampToValueAtTime(880, t + 0.07);
+      o2.frequency.setValueAtTime(1320, t);
+      g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.14);
+      o.connect(g); o2.connect(g);
+      o.start(t); o2.start(t); o.stop(t + 0.15); o2.stop(t + 0.1);
+    }
+  }
+
+  showToast(msg) {
+    this.setState({ toast: msg });
+    clearTimeout(this._toast);
+    this._toast = setTimeout(() => this.setState({ toast: null }), 2400);
+  }
+
+  placedZoneOf(id) {
+    const p = this.state.place;
+    return Object.keys(p).find(k => p[k] === id) || null;
+  }
+
+  put(zoneN, id) {
+    if (!id || this.state.checked) return;
+    const place = Object.assign({}, this.state.place);
+    const prev = this.placedZoneOf(id);
+    if (prev) delete place[prev];
+    place[zoneN] = id;
+    this.sfx('drop');
+    this.setState({ place, selected: null, drag: null, hoverZone: null });
+  }
+
+  zoneAt(x, y) {
+    let hit = null;
+    Object.keys(this.zones).forEach(n => {
+      const el = this.zones[n];
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) hit = n;
+    });
+    return hit;
+  }
+
+  renderVals(){ const r = this._rv(); return Object.assign(__mkNav(), r, __mkMapVals(2, r.onPlay)); }
+  _rv() {
+    const s = this.state;
+    const placedCount = Object.keys(s.place).length;
+    const rows = JOBS.map(j => {
+      const id = s.place[j.n];
+      const p = id ? prof(id) : null;
+      const ok = s.checked && p && j.ans === id;
+      const bad = s.checked && p && j.ans !== id;
+      return {
+        n: j.n, l1: j.l1, l2: j.l2, color: prof(j.ans).color,
+        hasCard: !!p,
+        cardImg: p ? A(p.img) : '', cardBg: p ? 'url("'+A(p.img)+'")' : 'none',
+        cardName: p ? p.name : '',
+        cardColor: p ? p.color : '#2b3a4a',
+        zoneBorder: ok ? '#4f9b1b' : bad ? '#c1272d' : (s.hoverZone === String(j.n) ? '#f5a406' : 'rgba(18,58,107,.3)'),
+        zoneBg: ok ? '#eaf8e2' : bad ? '#fdecec' : (s.hoverZone === String(j.n) ? 'rgba(245,164,6,.14)' : 'rgba(18,58,107,.04)'),
+        statusShow: ok || bad,
+        statusText: ok ? '✓ BENAR' : '✕ SALAH',
+        statusColor: ok ? '#3d7a12' : '#c1272d',
+        zoneRef: (el) => { this.zones[j.n] = el; },
+        onZone: () => {
+          if (s.checked) return;
+          if (s.selected) { this.put(j.n, s.selected); return; }
+          if (s.place[j.n]) {
+            const place = Object.assign({}, s.place);
+            delete place[j.n];
+            this.sfx('close');
+            this.setState({ place });
+          }
+        }
+      };
+    });
+    const cards = PROFESI.map((p, pi) => {
+      const used = !!this.placedZoneOf(p.id);
+      return {
+        n: pi + 1, name: p.name, img: A(p.img), bg: 'url("'+A(p.img)+'")', color: p.color,
+        border: s.selected === p.id ? '#f5a406' : 'transparent',
+        opacity: used ? 0 : 1,
+        vis: used ? 'hidden' : 'visible',
+        onDown: (e) => {
+          if (used || s.checked) return;
+          this._down = { x: e.clientX, y: e.clientY, id: p.id, moved: false };
+          this.setState({ drag: { id: p.id, x: e.clientX, y: e.clientY } });
+        },
+        onClick: () => {
+          if (used || s.checked) return;
+          if (this._down && this._down.moved) return;
+          this.sfx('click');
+          this.setState({ selected: s.selected === p.id ? null : p.id });
+        }
+      };
+    });
+    return {
+      isMap: s.view === 'map',
+      isGame: s.view === 'game',
+      rows, cards,
+      progressText: placedCount + '/8',
+      checkFilter: placedCount === 8 ? 'none' : 'grayscale(.55) opacity(.8)',
+      dragImg: s.drag ? A(prof(s.drag.id).img) : null, dragBg: s.drag ? 'url("'+A(prof(s.drag.id).img)+'")' : 'none',
+      dragX: s.drag ? s.drag.x + 'px' : '0px',
+      dragY: s.drag ? s.drag.y + 'px' : '0px',
+      result: s.result,
+      toast: s.toast,
+      waveOpacity: s.muted ? 0 : 1,
+      muteOpacity: s.muted ? 1 : 0,
+      onMove: (e) => {
+        if (!this._down) return;
+        if (Math.abs(e.clientX - this._down.x) > 5 || Math.abs(e.clientY - this._down.y) > 5) this._down.moved = true;
+        const hz = this.zoneAt(e.clientX, e.clientY);
+        this.setState({ drag: { id: this._down.id, x: e.clientX, y: e.clientY }, hoverZone: hz });
+      },
+      onUp: (e) => {
+        if (!this._down) return;
+        const d = this._down;
+        this._down = null;
+        const hz = this.zoneAt(e.clientX, e.clientY);
+        if (d.moved && hz) this.put(hz, d.id);
+        else this.setState({ drag: null, hoverZone: null });
+      },
+      onPlay: () => { this.sfx('click'); this.setState({ view: 'game' }); },
+      goPanduan: () => { this.sfx('click'); __mkNav().navPanduan(); },
+      goEksplorasi: () => { this.sfx('click'); __dcGo('2. Scene Eksplorasi.dc.html'); },
+      onHome: () => { this.sfx('click'); __dcGo('1. Misi Konstruksi.dc.html'); },
+      onReset: () => {
+        this.sfx('close');
+        this.setState({ place: {}, selected: null, drag: null, checked: false, result: null, hoverZone: null });
+        this.showToast('Permainan direset — Progres: 0/8');
+      },
+      onCheck: () => {
+        if (placedCount < 8) {
+          this.sfx('close');
+          this.showToast('Lengkapi semua pasangan profesi terlebih dahulu! Progres: ' + placedCount + '/8');
+          return;
+        }
+        let right = 0;
+        JOBS.forEach(j => { if (s.place[j.n] === j.ans) right++; });
+        const wrong = 8 - right;
+        const score = Math.round(right / 8 * 100);
+        this.sfx('done');
+        this.setState({
+          checked: true,
+          result: {
+            right, wrong, score,
+            note: right === 8 ? 'Luar biasa! Semua jobdesk cocok dengan profesinya.' : 'Periksa kembali kotak bertanda ✕, lalu coba lagi.'
+          }
+        });
+      },
+      onRetry: () => {
+        this.sfx('click');
+        this.setState({ place: {}, selected: null, drag: null, checked: false, result: null, hoverZone: null });
+      },
+      onNext: () => { this.sfx('click'); __mkGo(3); },
+      toggleMusic: () => {
+        this.sfx('click');
+        const muted = !s.muted;
+        this.setState({ muted });
+        __mkMuteSet(muted ? '1' : '0');
+        if (this.audio) { if (muted) this.audio.pause(); else this.audio.play().catch(() => {}); }
+        this.showToast(muted ? 'Musik latar: nonaktif' : 'Musik latar: aktif');
+      }
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="ext-resource-dependency" content="assets/p-informasi-game.webp" data-resource-id="infoImg">
+<meta name="ext-resource-dependency" content="assets/p-pengembang.webp" data-resource-id="pengImg">
+<meta name="ext-resource-dependency" content="assets/s2/p-panduan-gim.webp" data-resource-id="panduanGim">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+html,body{margin:0;padding:0;background:#0c1116;overflow:hidden;height:100%}
+@keyframes mkPop{0%{transform:scale(.86);opacity:0}60%{transform:scale(1.02);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes mkFade{from{opacity:0}to{opacity:1}}
+@keyframes mkTitle{from{transform:rotate(-2deg) scale(.94);opacity:0}to{transform:rotate(-2deg) scale(1);opacity:1}}
+@keyframes mkToast{0%{transform:translate(-50%,1em);opacity:0}12%{transform:translate(-50%,0);opacity:1}80%{opacity:1}100%{opacity:0}}
+@keyframes spFade{from{opacity:0}to{opacity:1}}
+@keyframes spPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,214,26,.85)}70%{box-shadow:0 0 0 1.2em rgba(255,214,26,0)}}
+@keyframes s2Fade{from{opacity:0}to{opacity:1}}
+@keyframes s2Pop{0%{transform:scale(.9);opacity:0}60%{transform:scale(1.02);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes s2Pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,214,26,.85)}70%{box-shadow:0 0 0 1.2em rgba(255,214,26,0)}}
+@keyframes s2Check{0%{transform:scale(0) rotate(-40deg);opacity:0}70%{transform:scale(1.18) rotate(4deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
+a{color:#f4ab03}a:hover{color:#ffd257}
+</style>
+<script>
+window.__dcGo = function (path) {
+  var url = encodeURI(path);
+  var embedded = false;
+  try { embedded = !!(window.parent && window.parent !== window); } catch (e) {}
+  try { if (embedded) window.parent.postMessage({ type: 'omelette:navigate', path: path, file: path, url: url }, '*'); } catch (e) {}
+  if (embedded && window.__mkShell) return;
+  try { if (window.top && window.top !== window) { window.top.location.href = url; return; } } catch (e) {}
+  window.location.href = url;
+};
+try { if (window.parent && window.parent !== window && window.parent.__mkShellHost) window.__mkShell = true; } catch (e) {}
+</script>
+</helmet>
+<template id="__bundler_thumbnail" data-bg-color="#0c1116"><svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="800" fill="#0c1116"/></svg></template>
+<div style="width:100%;height:100vh;display:flex;align-items:center;justify-content:center;background:#0c1116">
+<div style="position:relative;width:min(100vw,177.78vh);height:min(56.25vw,100vh);font-size:min(1vw,1.7778vh);overflow:hidden;background:#7a5a2e;box-shadow:0 0 4em rgba(0,0,0,.6)">
+<sc-if value="{{ sceneHome }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0">
+
+<img src="assets/p-bg.webp" alt="Lokasi proyek konstruksi" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center">
+
+<div style="position:absolute;left:8.5%;top:17.5%;width:58%;animation:mkTitle .7s cubic-bezier(.2,1.3,.4,1) both;transform-origin:left center">
+  <div style="font-family:Impact,'Arial Black','Haettenschweiler',sans-serif;font-size:8.3em;line-height:.92;letter-spacing:.01em;font-style:italic;color:#ffd11a;background:linear-gradient(#fff3a8 6%,#ffc400 55%,#f39200 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(.06em .07em 0 #1a1208) drop-shadow(-.03em -.03em 0 #1a1208) drop-shadow(.03em -.03em 0 #1a1208) drop-shadow(-.03em .03em 0 #1a1208) drop-shadow(.12em .16em .05em rgba(0,0,0,.55))">MISI<br>KONSTRUKSI:</div>
+  <div style="margin-top:.1em;font-family:Impact,'Arial Black','Haettenschweiler',sans-serif;font-size:4.75em;white-space:nowrap;line-height:1;font-style:italic;letter-spacing:.005em;background:linear-gradient(#ffd98a 8%,#ff9d00 60%,#e06a00 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(.05em .06em 0 #1a1208) drop-shadow(-.03em -.03em 0 #1a1208) drop-shadow(.03em -.03em 0 #1a1208) drop-shadow(-.03em .03em 0 #1a1208) drop-shadow(.1em .14em .04em rgba(0,0,0,.5))">MENJELAJAH PROFESI TKP</div>
+</div>
+
+<div style="position:absolute;right:2.4%;top:4.2%;display:flex;align-items:center">
+  <button type="button" onClick="{{ toggleMusic }}" title="Nyalakan / matikan musik" style="position:relative;width:4.9em;height:4.9em;flex:none;padding:0;display:flex;align-items:center;justify-content:center;border:.26em solid #fff;border-radius:50%;background:linear-gradient(#4aa3f0,#1f6fc4 60%,#15539a);cursor:pointer;box-shadow:0 .3em .5em rgba(0,0,0,.45),inset 0 -.3em .5em rgba(0,0,0,.22);transition:transform .15s ease,filter .15s ease" style-hover="transform:scale(1.08);filter:brightness(1.1)" style-active="transform:scale(.94)">
+    <svg viewBox="0 0 24 24" aria-hidden="true" style="width:2.5em;height:2.5em;opacity:{{ soundIconOpacity }}"><path d="M4 9.5h3.2L12 5.4v13.2L7.2 14.5H4z" fill="#fff"></path><path d="M15.2 9.2a4 4 0 0 1 0 5.6" stroke="#fff" stroke-width="1.9" stroke-linecap="round" fill="none" opacity="{{ waveOpacity }}"></path><path d="M17.8 6.9a7.4 7.4 0 0 1 0 10.2" stroke="#fff" stroke-width="1.9" stroke-linecap="round" fill="none" opacity="{{ waveOpacity }}"></path><path d="M15.5 8.5l6 7M21.5 8.5l-6 7" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none" opacity="{{ muteOpacity }}"></path></svg>
+  </button>
+</div>
+
+<div style="position:absolute;left:22%;top:67.4%;height:21.6%;display:flex;gap:1.1em;align-items:stretch;align-items:stretch">
+
+  <button type="button" onClick="{{ onMulai }}" title="Mulai" style="flex:0 0 auto;height:100%;position:relative;display:flex;align-items:center;justify-content:center;padding:0;border:0;background:transparent;cursor:pointer;transition:transform .16s ease,filter .16s ease" style-hover="transform:translateY(-.5em) scale(1.03);filter:brightness(1.08)" style-active="transform:translateY(.1em) scale(.98)">
+    <img src="assets/p-btn-mulai2.webp" alt="Mulai" style="height:100%;width:auto;display:block;object-fit:contain;filter:drop-shadow(0 .45em .7em rgba(0,0,0,.45))">
+  </button>
+
+  <button type="button" onClick="{{ onInfo }}" title="Info Game" style="flex:0 0 auto;height:100%;position:relative;display:flex;align-items:center;justify-content:center;padding:0;border:0;background:transparent;cursor:pointer;transition:transform .16s ease,filter .16s ease" style-hover="transform:translateY(-.5em) scale(1.03);filter:brightness(1.08)" style-active="transform:translateY(.1em) scale(.98)">
+    <img src="assets/p-btn-info2.webp" alt="Info Game" style="height:100%;width:auto;display:block;object-fit:contain;filter:drop-shadow(0 .45em .7em rgba(0,0,0,.45))">
+  </button>
+
+  <button type="button" onClick="{{ onPengembang }}" title="Pengembang" style="flex:0 0 auto;height:100%;position:relative;display:flex;align-items:center;justify-content:center;padding:0;border:0;background:transparent;cursor:pointer;transition:transform .16s ease,filter .16s ease" style-hover="transform:translateY(-.5em) scale(1.03);filter:brightness(1.08)" style-active="transform:translateY(.1em) scale(.98)">
+    <img src="assets/p-btn-peng2.webp" alt="Pengembang" style="height:100%;width:auto;display:block;object-fit:contain;filter:drop-shadow(0 .45em .7em rgba(0,0,0,.45))">
+  </button>
+
+  <button type="button" onClick="{{ onReferensi }}" title="Referensi" style="flex:0 0 auto;height:100%;position:relative;display:flex;align-items:center;justify-content:center;padding:0;border:0;background:transparent;cursor:pointer;transition:transform .16s ease,filter .16s ease" style-hover="transform:translateY(-.5em) scale(1.03);filter:brightness(1.08)" style-active="transform:translateY(.1em) scale(.98)">
+    <img src="assets/p-btn-ref2.webp" alt="Referensi" style="height:100%;width:auto;display:block;object-fit:contain;filter:drop-shadow(0 .45em .7em rgba(0,0,0,.45))">
+  </button>
+</div>
+
+
+
+<sc-if value="{{ overlaySrc }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeOverlay }}" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(8,12,18,.72);backdrop-filter:blur(2px);animation:mkFade .18s ease both;cursor:zoom-out">
+    <div style="position:relative;width:92%;animation:mkPop .32s cubic-bezier(.2,1.3,.4,1) both;cursor:default">
+      <div style="display:block;width:100%;aspect-ratio:16/9;border-radius:1.2em;box-shadow:0 1.5em 3em rgba(0,0,0,.6);background-image:{{ overlayCss }};background-size:100% 100%;background-repeat:no-repeat"></div>
+      <button type="button" onClick="{{ closeOverlay }}" title="Tutup" style="position:absolute;top:-1.1em;right:-1.1em;width:4.4em;height:4.4em;padding:0;border:.3em solid #fff;border-radius:50%;background:linear-gradient(#f0524b,#c9201a);color:#fff;font-family:'Arial Black',sans-serif;font-size:1.5em;line-height:1;cursor:pointer;box-shadow:0 .35em .6em rgba(0,0,0,.5),inset 0 -.3em .5em rgba(0,0,0,.25);transition:transform .15s ease" style-hover="transform:scale(1.1) rotate(90deg)" style-active="transform:scale(.94)">✕</button>
+    </div>
+  </div>
+</sc-if>
+
+</div></sc-if>
+<sc-if value="{{ scenePanduan }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0">
+
+<sc-if value="{{ pMap }}" hint-placeholder-val="{{ true }}">
+  <div style="position:absolute;inset:0;animation:spFade .25s ease both">
+    <img src="{{ mapSrc }}" alt="Peta misi — panduan terbuka" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+    <sc-for list="{{ mapNodes }}" as="n" hint-placeholder-count="0"><button type="button" onClick="{{ n.onClick }}" title="{{ n.title }}" style="position:absolute;left:{{ n.left }};top:{{ n.top }};width:12%;height:25%;padding:0;border:0;border-radius:1.4em;background:transparent;cursor:pointer;transition:transform .16s ease" style-hover="transform:scale(1.05)" style-active="transform:scale(.97)"></button></sc-for>
+    <sc-if value="{{ mapAllDone }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:84.3%;top:19%;width:3.6%;aspect-ratio:1;border-radius:50%;background:#2e9c3a;border:.25em solid #fff;display:flex;align-items:center;justify-content:center;box-shadow:0 .2em .4em rgba(0,0,0,.35);pointer-events:none"><svg viewBox="0 0 24 24" aria-hidden="true" style="width:62%;height:62%"><path d="M5 12.5l4.2 4.2L19 7" stroke="#fff" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></sc-if>
+    <div style="position:absolute;right:2%;top:2.4%;display:flex;align-items:center;gap:.6em;z-index:30">
+      <button type="button" onClick="{{ toggleMusic }}" title="Nyalakan / matikan musik" style="position:relative;width:3.4em;height:3.4em;display:flex;align-items:center;justify-content:center;padding:0;border:.22em solid #fff;border-radius:50%;background:linear-gradient(#5aa9f2,#2170cd 62%,#175aa8);cursor:pointer;box-shadow:0 .28em .45em rgba(0,0,0,.4),inset 0 -.28em .45em rgba(0,0,0,.22);transition:transform .15s ease" style-hover="transform:scale(1.07)" style-active="transform:scale(.95)"><svg viewBox="0 0 24 24" aria-hidden="true" style="width:58%;height:58%"><path d="M4 9.5h3.2L12 5.4v13.2L7.2 14.5H4z" fill="#fff"></path><path d="M15.2 9.2a4 4 0 0 1 0 5.6" stroke="#fff" stroke-width="1.9" stroke-linecap="round" fill="none" opacity="{{ waveOpacity }}"></path><path d="M17.8 6.9a7.4 7.4 0 0 1 0 10.2" stroke="#fff" stroke-width="1.9" stroke-linecap="round" fill="none" opacity="{{ waveOpacity }}"></path><path d="M15.2 8.4l6.4 7.2M21.6 8.4l-6.4 7.2" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="{{ muteOpacity }}"></path></svg></button>
+      <button type="button" onClick="{{ onHome }}" title="Kembali ke Home" style="position:relative;width:3.4em;height:3.4em;display:flex;align-items:center;justify-content:center;padding:0;border:.22em solid #fff;border-radius:50%;background:linear-gradient(#ffb23e,#f57c00 62%,#cf5a00);cursor:pointer;box-shadow:0 .28em .45em rgba(0,0,0,.4),inset 0 -.28em .45em rgba(0,0,0,.22);transition:transform .15s ease" style-hover="transform:scale(1.07)" style-active="transform:scale(.95)">
+        <svg viewBox="0 0 24 24" aria-hidden="true" style="width:58%;height:58%"><path d="M12 3.2 2.8 11h2.6v9.2h5.2v-5.6h2.8v5.6h5.2V11h2.6z" fill="#fff"></path></svg>
+      </button>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ pDoc }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;inset:0;animation:spFade .25s ease both">
+    <img src="assets/s2/p-panduan-gim.webp" alt="Panduan game: nama ikon dan fungsinya" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+    <div style="position:absolute;right:2%;top:2.4%;display:flex;align-items:center;gap:.6em;z-index:30">
+      <button type="button" onClick="{{ toggleMusic }}" title="Nyalakan / matikan musik" style="position:relative;width:3.4em;height:3.4em;display:flex;align-items:center;justify-content:center;padding:0;border:.22em solid #fff;border-radius:50%;background:linear-gradient(#5aa9f2,#2170cd 62%,#175aa8);cursor:pointer;box-shadow:0 .28em .45em rgba(0,0,0,.4),inset 0 -.28em .45em rgba(0,0,0,.22);transition:transform .15s ease" style-hover="transform:scale(1.07)" style-active="transform:scale(.95)">
+        <svg viewBox="0 0 24 24" aria-hidden="true" style="width:58%;height:58%"><path d="M4 9.5h3.2L12 5.4v13.2L7.2 14.5H4z" fill="#fff"></path><path d="M15.2 9.2a4 4 0 0 1 0 5.6" stroke="#fff" stroke-width="1.9" stroke-linecap="round" fill="none" opacity="{{ waveOpacity }}"></path><path d="M17.8 6.9a7.4 7.4 0 0 1 0 10.2" stroke="#fff" stroke-width="1.9" stroke-linecap="round" fill="none" opacity="{{ waveOpacity }}"></path><path d="M15.2 8.4l6.4 7.2M21.6 8.4l-6.4 7.2" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="{{ muteOpacity }}"></path></svg>
+      </button>
+      <button type="button" onClick="{{ pBack }}" title="Kembali ke peta" style="position:relative;width:3.4em;height:3.4em;display:flex;align-items:center;justify-content:center;padding:0;border:.22em solid #fff;border-radius:50%;background:linear-gradient(#7cd08a,#2e9c3a 62%,#1d6a26);cursor:pointer;box-shadow:0 .28em .45em rgba(0,0,0,.4),inset 0 -.28em .45em rgba(0,0,0,.22);transition:transform .15s ease" style-hover="transform:scale(1.07)" style-active="transform:scale(.95)">
+        <svg viewBox="0 0 24 24" aria-hidden="true" style="width:58%;height:58%"><path d="M3.4 6.2 9 4.2v13.6l-5.6 2z" fill="#fff"></path><path d="M9 4.2l6 2v13.6l-6-2z" fill="#e8f5ea"></path><path d="M15 6.2l5.6-2v13.6l-5.6 2z" fill="#fff"></path></svg>
+      </button>
+      <button type="button" onClick="{{ onHome }}" title="Kembali ke Home" style="position:relative;width:3.4em;height:3.4em;display:flex;align-items:center;justify-content:center;padding:0;border:.22em solid #fff;border-radius:50%;background:linear-gradient(#ffb23e,#f57c00 62%,#cf5a00);cursor:pointer;box-shadow:0 .28em .45em rgba(0,0,0,.4),inset 0 -.28em .45em rgba(0,0,0,.22);transition:transform .15s ease" style-hover="transform:scale(1.07)" style-active="transform:scale(.95)">
+        <svg viewBox="0 0 24 24" aria-hidden="true" style="width:58%;height:58%"><path d="M12 3.2 2.8 11h2.6v9.2h5.2v-5.6h2.8v5.6h5.2V11h2.6z" fill="#fff"></path></svg>
+      </button>
+    </div>
+    <button type="button" onClick="{{ pNext }}" title="Selanjutnya — mulai misi profesi" style="position:absolute;left:73.2%;top:87.6%;width:23%;height:9.4%;padding:0;border:0;border-radius:1.2em;background:transparent;cursor:pointer;transition:transform .16s ease" style-hover="transform:scale(1.04)" style-active="transform:scale(.97)"></button>
+  </div>
+</sc-if>
+
+
+
+</div></sc-if>
+<sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;left:50%;bottom:4%;transform:translateX(-50%);padding:.7em 1.6em;border-radius:2em;background:rgba(12,17,22,.88);border:.15em solid rgba(255,255,255,.35);color:#fff;font-family:'Trebuchet MS',sans-serif;font-size:1.9em;white-space:nowrap;animation:mkToast 2.2s ease forwards">{{ toast }}</div>
+</sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;bgmVolume&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:45,&quot;min&quot;:0,&quot;max&quot;:100,&quot;step&quot;:5,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Audio&quot;},&quot;sfxVolume&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:70,&quot;min&quot;:0,&quot;max&quot;:100,&quot;step&quot;:5,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Audio&quot;},&quot;startMuted&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Audio&quot;}}">
+const PROFESI = [
+  { id: 'mandor', title: 'Mandor', src: 'assets/s2/p-mandor.webp', col: 0, row: 0 },
+  { id: 'surveyor', title: 'Surveyor', src: 'assets/s2/p-surveyor.webp', col: 1, row: 0 },
+  { id: 'estimator', title: 'Estimator', src: 'assets/s2/p-estimator.webp', col: 2, row: 0 },
+  { id: 'logistik', title: 'Logistik', src: 'assets/s2/p-logistik.webp', col: 3, row: 0 },
+  { id: 'pengawas', title: 'Pengawas', src: 'assets/s2/p-pengawas.webp', col: 0, row: 1, left: '9.9%' },
+  { id: 'pelaksana', title: 'Pelaksana', src: 'assets/s2/p-pelaksana.webp', col: 1, row: 1 },
+  { id: 'asisten', title: 'Asisten', src: 'assets/s2/p-asisten.webp', col: 2, row: 1 },
+  { id: 'admin', title: 'Admin Teknik', src: 'assets/s2/p-admin.webp', col: 3, row: 1 }
+];
+const COL_LEFT = ['10.4%', '24.7%', '39.6%', '52.7%'];
+const ROW_TOP = ['24%', '58.4%'];
+function RES(id, path) { const r = window.__resources; return (r && r[id]) || path; }
+
+var LS=(function(){try{var t=window.localStorage;t.setItem('__mk','1');t.removeItem('__mk');return t;}catch(e){var m={};return{getItem:function(k){return (k in m)?m[k]:null;},setItem:function(k,v){m[k]=String(v);},removeItem:function(k){delete m[k];},clear:function(){m={};}};}})();
+function __mkHub(){try{var w=window;for(var i=0;i<8&&w.parent&&w.parent!==w;i++){w=w.parent;if(w.__mkHub&&typeof w.__mkHub==='object')return w.__mkHub;}}catch(e){}return null;}
+function __mkLoad(k){var H=__mkHub(),r=null;try{r=H?(H.store||{})[k]:sessionStorage.getItem('mk_p_'+k);return r?JSON.parse(r):null;}catch(e){return null;}}
+function __mkSave(k,v){var s;try{s=JSON.stringify(v);}catch(e){return;}var H=__mkHub();if(H){H.store=H.store||{};H.store[k]=s;}else{try{sessionStorage.setItem('mk_p_'+k,s);}catch(e){}}}
+function __mkTakeGo(){var g=__mkLoad('go');if(g)__mkSave('go',null);return g;}
+var __MK_FILES=['1. Misi Konstruksi.dc.html','2. Scene Eksplorasi.dc.html','3. Tebak Profesi.dc.html','4. Pengalaman Kerja.dc.html','5. Profesi Pertama.dc.html','6. Scene Evaluasi.dc.html'];
+var __MK_NAMES=['Panduan','Eksplorasi 8 Profesi','Tebak Profesi','Pengalaman Kerja','Profesi Pertamaku','Evaluasi'];
+function __mkChecks(){var s1=__mkLoad('s1')||{},s2=__mkLoad('s2')||{},s3=__mkLoad('s3')||{},s4=__mkLoad('s4')||{},s5=__mkLoad('s5')||{};return [!!s1.done,!!(s2.ever||(s2.learned&&s2.learned.length>=8)),!!s3.ever,!!(s4.ever||(s4.done&&s4.done.length===8&&s4.done.every(Boolean))),!!(s5.ever||(s5.xp||0)>=900)];}
+function __mkLevel(){var c=__mkChecks(),L=0;while(L<5&&c[L])L++;return L;}
+function __mkAlert(title,html){var o=document.getElementById('__mkLock');if(o)o.remove();o=document.createElement('div');o.id='__mkLock';o.style.cssText='position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(8,14,22,.62);font-family:Trebuchet MS,sans-serif';o.innerHTML='<div style="max-width:min(86vw,34em);padding:1.6em 1.9em;border-radius:1.2em;border:.25em solid #fff;background:linear-gradient(#ffd84a,#f5a406);box-shadow:0 .6em 1.6em rgba(0,0,0,.45);color:#1a1208;text-align:center;font-size:clamp(14px,1.6vw,22px)"><div style="font-weight:900;font-size:1.4em;margin-bottom:.4em">'+title+'</div><div style="line-height:1.6;margin-bottom:1em">'+html+'</div><button type="button" style="font:inherit;font-weight:900;padding:.5em 1.6em;border-radius:2em;border:.18em solid #fff;background:#2170cd;color:#fff;cursor:pointer">OKE</button></div>';o.addEventListener('click',function(e){if(e.target===o||e.target.tagName==='BUTTON')o.remove();});document.body.appendChild(o);}
+function __mkLocked(i){var L=__mkLevel();__mkAlert('Misi '+__MK_NAMES[i]+' masih terkunci','Selesaikan dulu misi <b>'+__MK_NAMES[L]+'</b>'+(L>0?' dengan <b>skor maksimal</b>':'')+' untuk membuka misi berikutnya.');}
+function __mkGoEval(){var c=__mkChecks(),m=[];c.forEach(function(v,i){if(!v)m.push(__MK_NAMES[i]);});if(!m.length){__dcGo(__MK_FILES[5]);return;}__mkAlert('Evaluasi masih terkunci','Selesaikan dulu misi berikut dengan skor maksimal:<br><b>'+m.join('<br>')+'</b>');}
+function __mkGo(i,enter){if(i>=5){__mkGoEval();return;}if(i>__mkLevel()){__mkLocked(i);return;}__mkSave('go',enter?'enter'+i:null);__dcGo(__MK_FILES[i]);}
+function __mkNav(){window.__mkReady=1;var g=function(i){return function(){__mkGo(i,true);};};return {navPanduan:g(0),navEksplorasi:g(1),navTebak:g(2),navPengalaman:g(3),navProfesi:g(4),navEvaluasi:g(5)};}
+function __mkMapUrl(p){var H=__mkHub();if(H&&H.res)return H.res(p);var r=window.__resources;return (r&&r[p])||p;}
+var __MK_MAPS=[['s2','p-maps-panduan',[[21.5,66],[36,49],[54.5,36],[71.5,55],[81,33],[93.5,28]]],['s2','p-map-eksplorasi',[[19.5,63],[34,48],[50.5,36],[65.5,54],[78.5,30],[92,27]]],['s3','p-maps-tebak',[[22,62],[36,49],[51,38],[65,49],[79.5,34],[92,28]]],['s4','p-world',[[21,66],[35.5,51],[51,40],[67,54],[80.5,35],[93,28]]],['s5','p-maps-profesi',[[21,65],[35.5,49],[51,39.5],[67,49],[81,32],[93.5,27]]]];
+function __mkMapVals(own,fn){if(own>=0&&fn&&!window.__mkEntered){window.__mkEntered=1;if(__mkLoad('go')==='enter'+own){__mkSave('go',null);setTimeout(function(){if(own===0)__mkSave('s1',{done:true});fn();},0);}}var L=__mkLevel(),m=__MK_MAPS[Math.min(L,4)],u=__mkMapUrl(['assets',m[0],m[1]+'.webp'].join('/'));return {mapSrc:u,mapBg:'url("'+u+'")',mapAllDone:L>=5,mapNodes:m[2].map(function(c,i){var open=i<=L;return {left:(c[0]-6)+'%',top:(c[1]-10.5)+'%',title:__MK_NAMES[i]+(open?'':' (terkunci)'),onClick:function(){if(!open){__mkLocked(i);return;}if(i===own&&fn){if(i===0)__mkSave('s1',{done:true});fn();}else __mkGo(i,true);}};})};}
+function __mkMuteGet(){var S=__mkHub();if(S)return S.getMuted();try{return window.localStorage.getItem('mk_bgm_muted');}catch(e){return null;}}
+function __mkMuteSet(v){var S=__mkHub();if(S)S.setMuted(v==='1');try{window.localStorage.setItem('mk_bgm_muted',v);}catch(e){}}
+function __mkBgmAudio(){var S=__mkHub();if(S)return S.proxy();var a=new Audio();var own=window.__resources||{};var u=own['assets/bgm.mp3']||own.bgm;a.src=u||'assets/bgm.mp3';if(!u&&window.parent!==window){var h=function(e){var d=e.data;if(d&&d.type==='mk:bgm'&&d.blob){window.removeEventListener('message',h);var was=!a.paused;a.src=URL.createObjectURL(d.blob);if(was){var p=a.play();if(p&&p.catch)p.catch(function(){});}}};window.addEventListener('message',h);try{window.parent.postMessage({type:'mk:bgm?'},'*');}catch(e){}}return a;}
+class Component extends DCLogic {
+  state = { scene: (__mkLoad('go') === 'enter0' ? 'panduan' : 'home'), pView: 'map', eView: 'map', detail: null, learned: [], overlaySrc: null, muted: false, toast: null };
+
+  componentDidMount() {
+    const stored = __mkMuteGet();
+    const muted = stored === null ? !!this.props.startMuted : stored === '1';
+    const a = __mkBgmAudio();
+    a.loop = true;
+    const savedVol = parseInt(LS.getItem('mk_bgm_vol') || '', 10);
+    a.volume = (Number.isFinite(savedVol) ? savedVol : (this.props.bgmVolume ?? 45)) / 100;
+    const tt = parseFloat(LS.getItem('mk_bgm_time') || '0');
+    if (tt > 0) a.currentTime = tt;
+    this.audio = a;
+    this.saver = setInterval(() => { if (!a.paused) LS.setItem('mk_bgm_time', String(a.currentTime)); }, 2000);
+    this.setState({ muted });
+    if (!muted) a.play().catch(() => {
+      const kick = () => { if (!this.state.muted) a.play().catch(() => {}); window.removeEventListener('pointerdown', kick); window.removeEventListener('keydown', kick); };
+      window.addEventListener('pointerdown', kick); window.addEventListener('keydown', kick);
+    });
+    this.onKey = (e) => {
+      if (e.key !== 'Escape') return;
+      const s = this.state;
+      if (s.overlaySrc) this.closeOverlay();
+      else if (s.scene === 'panduan' && s.pView === 'panduan') this.setState({ pView: 'map' });
+      else if (s.scene === 'eksplorasi' && s.detail) this.back();
+      else if (s.scene === 'eksplorasi' && s.eView === 'shelf') this.goMaps();
+    };
+    window.addEventListener('keydown', this.onKey);
+    [['panduanGim', 'assets/s2/p-panduan-gim.webp'], ['map', 'assets/s2/p-map.webp'], ['scene21', 'assets/s2/p-scene21.webp']].forEach(p => { const im = new Image(); im.src = RES(p[0], p[1]); });
+    PROFESI.forEach(p => { const im = new Image(); im.src = RES(p.id, p.src); });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.saver);
+    clearTimeout(this._toast);
+    window.removeEventListener('keydown', this.onKey);
+    if (this.audio) { this.audio.pause(); this.audio.src = ''; }
+  }
+
+  ctx() {
+    if (!this._ctx) { const AC = window.AudioContext || window.webkitAudioContext; this._ctx = new AC(); }
+    if (this._ctx.state === 'suspended') this._ctx.resume();
+    return this._ctx;
+  }
+
+  sfx(kind) {
+    const c = this.ctx(), t = c.currentTime, g = c.createGain();
+    g.connect(c.destination);
+    const vol = 0.16 * ((this.props.sfxVolume ?? 70) / 100);
+    if (kind === 'close') {
+      const o = c.createOscillator(); o.type = 'triangle';
+      o.frequency.setValueAtTime(520, t); o.frequency.exponentialRampToValueAtTime(200, t + 0.16);
+      g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.18);
+      o.connect(g); o.start(t); o.stop(t + 0.2);
+    } else if (kind === 'done') {
+      [523, 659, 784, 1047].forEach((f, i) => {
+        const o = c.createOscillator(), gg = c.createGain();
+        o.type = 'triangle'; o.frequency.value = f;
+        const s = t + i * 0.11;
+        gg.gain.setValueAtTime(0.0001, s); gg.gain.exponentialRampToValueAtTime(vol, s + 0.02);
+        gg.gain.exponentialRampToValueAtTime(0.0001, s + 0.32);
+        o.connect(gg); gg.connect(c.destination); o.start(s); o.stop(s + 0.34);
+      });
+    } else {
+      const o = c.createOscillator(), o2 = c.createOscillator();
+      o.type = 'square'; o2.type = 'sine';
+      o.frequency.setValueAtTime(660, t); o.frequency.exponentialRampToValueAtTime(880, t + 0.07);
+      o2.frequency.setValueAtTime(1320, t);
+      g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.14);
+      o.connect(g); o2.connect(g);
+      o.start(t); o2.start(t); o.stop(t + 0.15); o2.stop(t + 0.1);
+    }
+  }
+
+  showToast(msg) {
+    this.setState({ toast: msg });
+    clearTimeout(this._toast);
+    this._toast = setTimeout(() => this.setState({ toast: null }), 2200);
+  }
+
+  closeOverlay = () => { this.sfx('close'); this.setState({ overlaySrc: null }); };
+
+  goScene(scene) { this.setState({ scene, overlaySrc: null, detail: null }); }
+
+  back = () => {
+    this.sfx('close');
+    const id = this.state.detail;
+    const learned = this.state.learned.includes(id) ? this.state.learned : this.state.learned.concat(id);
+    const justFinished = learned.length === PROFESI.length && this.state.learned.length < PROFESI.length;
+    this.setState({ detail: null, learned });
+    if (justFinished) { setTimeout(() => this.sfx('done'), 250); this.showToast('Semua profesi dipelajari! Tombol Selanjutnya terbuka.'); }
+  };
+
+  goMaps = () => { this.sfx('close'); this.setState({ eView: 'map', detail: null }); };
+
+  goHome = () => { this.sfx('click'); this.goScene('home'); };
+
+  renderVals(){ const r = this._rv(); return Object.assign(__mkNav(), r, __mkMapVals(0, r.pOpen)); }
+  _rv() {
+    const s = this.state;
+    const learned = s.learned;
+    const allDone = learned.length === PROFESI.length;
+    const detailP = s.detail ? PROFESI.find(p => p.id === s.detail) : null;
+    return {
+      sceneHome: s.scene === 'home',
+      scenePanduan: s.scene === 'panduan',
+      sceneEksplorasi: s.scene === 'eksplorasi',
+      toast: s.toast,
+      waveOpacity: s.muted ? 0 : 1,
+      muteOpacity: s.muted ? 1 : 0,
+      soundIconOpacity: s.muted ? 0.55 : 1,
+      onHome: this.goHome,
+      toggleMusic: () => {
+        this.sfx('click');
+        const muted = !s.muted;
+        this.setState({ muted });
+        __mkMuteSet(muted ? '1' : '0');
+        if (this.audio) { if (muted) this.audio.pause(); else this.audio.play().catch(() => {}); }
+        this.showToast(muted ? 'Musik latar: nonaktif' : 'Musik latar: aktif');
+      },
+      overlaySrc: s.overlaySrc,
+      overlayCss: s.overlaySrc ? `url(${s.overlaySrc})` : 'none',
+      closeOverlay: this.closeOverlay,
+      onMulai: () => { this.sfx('click'); setTimeout(() => this.goScene('panduan'), 160); },
+      onInfo: () => { this.sfx('click'); this.setState({ overlaySrc: RES('infoImg', 'assets/p-informasi-game.webp') }); },
+      onPengembang: () => { this.sfx('click'); this.setState({ overlaySrc: RES('pengImg', 'assets/p-pengembang.webp') }); },
+      onReferensi: () => { this.sfx('click'); this.showToast('Daftar referensi & sumber aset menyusul'); },
+      pMap: s.pView === 'map',
+      pDoc: s.pView === 'panduan',
+      pOpen: () => { this.sfx('click'); this.setState({ pView: 'panduan' }); },
+      pBack: () => { this.sfx('close'); this.setState({ pView: 'map' }); },
+      pNext: () => { this.sfx('click'); setTimeout(() => { __mkGo(1); }, 160); },
+      eMap: s.eView === 'map' && !s.detail,
+      eShelf: s.eView === 'shelf' && !s.detail,
+      eDetail: detailP ? RES(detailP.id, detailP.src) : null,
+      eDetailBg: detailP ? 'url("'+RES(detailP.id, detailP.src)+'")' : 'none',
+      doneOpacity: allDone ? 1 : 0,
+      allDone,
+      progressLabel: learned.length + ' / ' + PROFESI.length + ' profesi dipelajari',
+      speakerDisplay: s.detail ? 'none' : 'flex',
+      speakerLeft: s.eView === 'map' ? '84.6%' : '76.3%',
+      speakerTop: s.eView === 'map' ? '4.8%' : '5.6%',
+      speakerWidth: s.eView === 'map' ? '5.6%' : '6.2%',
+      speakerHeight: s.eView === 'map' ? '12%' : '9.3%',
+      cards: PROFESI.map(p => ({
+        title: p.title,
+        left: p.left || COL_LEFT[p.col],
+        top: ROW_TOP[p.row],
+        checkDisplay: learned.includes(p.id) ? 'flex' : 'none',
+        open: () => { this.sfx('click'); this.setState({ detail: p.id }); }
+      })),
+      eExplore: () => { this.sfx('click'); this.setState({ eView: 'shelf' }); },
+      onBackToShelf: this.back,
+      onMaps: this.goMaps,
+      eNext: () => { this.sfx('click'); __mkGo(2); }
+    };
+  }
+}
+</script>
+</body>
+</html>

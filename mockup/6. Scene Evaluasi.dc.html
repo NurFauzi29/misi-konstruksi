@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+html,body{margin:0;padding:0;background:#0c1116;overflow:hidden;height:100%}
+@keyframes evFade{from{opacity:0}to{opacity:1}}
+@keyframes evPop{0%{transform:scale(.94);opacity:0}64%{transform:scale(1.02);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes evGlow{0%,100%{box-shadow:0 .4em .7em rgba(0,0,0,.4),0 0 0 0 rgba(255,214,26,.7)}70%{box-shadow:0 .4em .7em rgba(0,0,0,.4),0 0 0 1.1em rgba(255,214,26,0)}}
+a{color:#f4ab03}a:hover{color:#ffd257}
+@media print{html,body{background:#fff;overflow:visible}[data-print-hide]{display:none !important}}
+</style>
+<script>
+window.__dcGo = function (path) {
+  var url = encodeURI(path);
+  var embedded = false;
+  try { embedded = !!(window.parent && window.parent !== window); } catch (e) {}
+  try { if (embedded) window.parent.postMessage({ type: 'omelette:navigate', path: path, file: path, url: url }, '*'); } catch (e) {}
+  if (embedded && window.__mkShell) return;
+  try { if (window.top && window.top !== window) { window.top.location.href = url; return; } } catch (e) {}
+  window.location.href = url;
+};
+try { if (window.parent && window.parent !== window && window.parent.__mkShellHost) window.__mkShell = true; } catch (e) {}
+</script>
+</helmet>
+<template id="__bundler_thumbnail" data-bg-color="#0c1116"><svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="800" fill="#0c1116"/></svg></template>
+<div style="width:100%;height:100vh;display:flex;align-items:center;justify-content:center;background:#0c1116;font-family:'Trebuchet MS',sans-serif">
+<div style="position:relative;width:min(100vw,177.78vh);height:min(56.25vw,100vh);font-size:min(1vw,1.7778vh);overflow:hidden;background:#0f1a26;box-shadow:0 0 4em rgba(0,0,0,.6)">
+
+<sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
+  <div style="position:absolute;inset:0;background-image:url(assets/s6/bg-evaluasi.webp);background-size:100% 100%;animation:evFade .3s ease both">
+    <div style="position:absolute;inset:7% 15% 11% 14%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8em;text-align:center">
+      
+      
+      <div style="flex:none;display:inline-flex;align-items:center;justify-content:center;padding:.34em 1.2em;border-radius:.6em;background:#123a6b;color:#ffd11a;font-size:2.35em;font-weight:800;letter-spacing:.08em;white-space:nowrap;line-height:1.1">EVALUASI AKHIR</div><div style="font-size:3em;font-weight:800;color:#123a6b;line-height:1.08;letter-spacing:.01em">UJI PEMAHAMANMU<br>8 PROFESI TEKNIK KONSTRUKSI DAN PERUMAHAN</div><div style="max-width:88%;font-size:1.45em;line-height:1.5;color:#2b3f57;text-wrap:pretty">Soal terdiri atas pilihan ganda, benar/salah, dan studi kasus jawaban singkat. Jawab semua soal lebih dulu — nilai muncul setelah evaluasi diselesaikan.</div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1.6em;font-size:1.35em;font-weight:700;color:#123a6b">
+        
+        <div><strong style="font-size: 1.35em;">20</strong>&nbsp;Soal Acak</div><div><strong style="font-size: 1.35em;">5</strong>&nbsp;Poin/Jawaban Benar</div>
+        <div>Lulus Jika Nilai <strong style="font-size: 1.35em;">&gt; 75</strong></div>
+        <div>🏅 Sertifikat Bagi yang Lulus</div>
+      </div>
+      <sc-if value="{{ hasRecap }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:1.25em;font-weight:700;color:#5a4306">{{ recapLabel }}</div>
+      </sc-if>
+      <button type="button" onClick="{{ onStart }}" title="Mulai evaluasi" style="padding:.6em 2em;border-radius:1em;border:.24em solid #b07708;background:linear-gradient(#ffd75e,#f5a406);color:#3a2a06;font-family:inherit;font-size:2em;font-weight:800;letter-spacing:.06em;cursor:pointer;animation:evGlow 2.4s ease-out infinite">▶ MULAI EVALUASI</button>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isQuiz }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;inset:0;background-image:url(assets/s6/bg-evaluasi.webp);background-size:100% 100%;animation:evFade .25s ease both">
+    <div style="position:absolute;inset:4% 13% 9% 12%;display:flex;flex-direction:column;gap:.7em;padding:.9em 1.1em;border-radius:1em;border:.18em solid rgba(18,58,107,.3);background:rgba(255,253,246,.93);box-shadow:0 .6em 1.4em rgba(0,0,0,.22)">
+
+      <div style="flex:none;display:flex;align-items:center;gap:.8em">
+        <div style="flex:none;padding:.3em .9em;border-radius:.6em;background:#123a6b;color:#ffd11a;font-size:1.25em;font-weight:800;letter-spacing:.06em;white-space:nowrap">EVALUASI AKHIR</div>
+        <div style="flex:none;font-size:1.25em;font-weight:800;color:#123a6b;white-space:nowrap">{{ qCounter }}</div>
+        <div style="flex:1;height:.9em;border-radius:.5em;background:#dde5ee;overflow:hidden"><div style="height:100%;width:{{ progressPct }};background:linear-gradient(90deg,#4caf50,#2e9c3a);transition:width .25s ease"></div></div>
+        <div style="font-size:1.2em;font-weight:800;color:#2e9c3a">{{ answeredLabel }}</div>
+      </div>
+
+      <div style="flex:none;display:flex;flex-wrap:wrap;gap:.3em">
+        <sc-for list="{{ dots }}" as="d" hint-placeholder-count="20">
+          <button type="button" onClick="{{ d.onClick }}" title="{{ d.title }}" style="width:2.1em;height:2.1em;border-radius:.45em;border:.14em solid {{ d.border }};background:{{ d.bg }};color:{{ d.color }};font-family:inherit;font-size:1.05em;font-weight:800;cursor:pointer">{{ d.no }}</button>
+        </sc-for>
+      </div>
+
+      <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:.7em;padding:1em;border-radius:1em;background:#fff;border:.16em solid rgba(18,58,107,.22);overflow:auto">
+        <div style="display:flex;align-items:center;gap:.6em">
+          <span style="padding:.22em .7em;border-radius:.45em;background:#e8f1fb;color:#123a6b;font-size:1.05em;font-weight:800;letter-spacing:.05em">{{ qKind }}</span>
+          <span style="padding:.22em .7em;border-radius:.45em;background:#fff3d0;color:#8a5b04;font-size:1.05em;font-weight:800;letter-spacing:.05em">{{ qProf }}</span>
+        </div>
+        <sc-if value="{{ qHasHead }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:.7em .9em;border-radius:.7em;background:#f4f8fd;border:.14em solid rgba(18,58,107,.18);font-size:1.25em;line-height:1.45;color:#20364f;text-wrap:pretty">{{ qHead }}</div>
+        </sc-if>
+        <div style="font-size:1.5em;font-weight:800;line-height:1.35;color:#123a6b;text-wrap:pretty">{{ qText }}</div>
+
+        <sc-if value="{{ qIsChoice }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:.45em">
+            <sc-for list="{{ qOpts }}" as="o" hint-placeholder-count="5">
+              <button type="button" onClick="{{ o.onClick }}" title="{{ o.title }}" style="display:flex;align-items:center;gap:.7em;padding:.6em .8em;border-radius:.75em;border:{{ o.border }};background:{{ o.bg }};color:{{ o.color }};font-family:inherit;font-size:1.25em;font-weight:700;line-height:1.35;text-align:left;cursor:pointer;transition:transform .12s ease" style-hover="transform:translateX(.25em)">
+                <span style="flex:none;width:1.8em;height:1.8em;display:flex;align-items:center;justify-content:center;border-radius:.4em;background:{{ o.tagBg }};color:{{ o.tagColor }};font-weight:800">{{ o.tag }}</span>
+                <span style="flex:1">{{ o.text }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ qIsShort }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:.5em">
+            <div style="font-size:1.15em;color:#31465e">Isi kedua kolom di bawah ini.</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.7em">
+              <div style="display:flex;flex-direction:column;gap:.25em">
+                <div style="font-size:1.05em;font-weight:800;color:#123a6b;letter-spacing:.03em">NAMA PROFESI</div>
+                <input type="text" value="{{ shortA }}" onChange="{{ onShortA }}" placeholder="{{ shortAPlaceholder }}" style="padding:.6em .8em;border-radius:.7em;border:.16em solid rgba(18,58,107,.35);background:#f9fcff;color:#20364f;font-family:inherit;font-size:1.25em;font-weight:700;text-transform:uppercase;outline:none">
+                <div style="display:flex;flex-wrap:wrap;gap:.35em;margin-top:.15em">
+                  <sc-for list="{{ aOpts }}" as="o" hint-placeholder-count="3">
+                    <span style="padding:.3em .7em;border-radius:.5em;border:.14em dashed rgba(18,58,107,.3);background:#f7fafd;color:#5c6b7d;font-size:1.02em;font-weight:700;user-select:none">{{ o.label }}</span>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:.25em">
+                <div style="font-size:1.05em;font-weight:800;color:#123a6b;letter-spacing:.03em">{{ shortBLabel }}</div>
+                <input type="text" value="{{ shortB }}" onChange="{{ onShortB }}" placeholder="{{ shortBPlaceholder }}" style="padding:.6em .8em;border-radius:.7em;border:.16em solid rgba(18,58,107,.35);background:#f9fcff;color:#20364f;font-family:inherit;font-size:1.25em;font-weight:700;text-transform:uppercase;outline:none">
+                <div style="display:flex;flex-wrap:wrap;gap:.35em;margin-top:.15em">
+                  <sc-for list="{{ bOpts }}" as="o" hint-placeholder-count="3">
+                    <span style="padding:.3em .7em;border-radius:.5em;border:.14em dashed rgba(18,58,107,.3);background:#f7fafd;color:#5c6b7d;font-size:1.02em;font-weight:700;user-select:none">{{ o.label }}</span>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+
+      <div style="flex:none;display:flex;align-items:center;gap:.7em">
+        <button type="button" onClick="{{ onPrev }}" title="Soal sebelumnya" style="padding:.55em 1.3em;border-radius:.8em;border:.16em solid #7d8a99;background:linear-gradient(#f2f4f7,#d3dae2);color:#123a6b;font-family:inherit;font-size:1.35em;font-weight:800;letter-spacing:.03em;cursor:pointer;opacity:{{ prevOpacity }}">❮ SEBELUMNYA</button>
+        <div style="flex:1;font-size:1.2em;color:#31465e">{{ navHint }}</div>
+        <sc-if value="{{ showNext }}" hint-placeholder-val="{{ true }}">
+          <button type="button" onClick="{{ onNext }}" title="Soal berikutnya" style="padding:.55em 1.4em;border-radius:.8em;border:.2em solid #123a6b;background:#123a6b;color:#fff;font-family:inherit;font-size:1.35em;font-weight:800;letter-spacing:.04em;cursor:pointer">BERIKUTNYA ❯</button>
+        </sc-if>
+        <button type="button" onClick="{{ onFinish }}" title="Selesaikan evaluasi dan lihat nilai" style="padding:.55em 1.5em;border-radius:.8em;border:.2em solid #b07708;background:linear-gradient(#ffd75e,#f5a406);color:#3a2a06;font-family:inherit;font-size:1.35em;font-weight:800;letter-spacing:.04em;cursor:pointer;opacity:{{ finishOpacity }}">SELESAI &amp; LIHAT NILAI ❯</button>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isLulus }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;inset:0;background-image:url(assets/s6/berhasil.webp);background-size:100% 100%;animation:evFade .3s ease both">
+    <div style="position:absolute;left:26.5%;top:47%;width:44.8%;height:33.5%;display:flex;flex-direction:column;justify-content:center;gap:.5em;padding:0 1.4em;animation:evPop .35s ease both">
+      <div style="display:flex;justify-content:center;gap:.6em">
+        <div style="display:flex;flex-direction:column;align-items:center;padding:.35em .9em;border-radius:.6em;background:#2e9c3a;color:#fff"><div style="font-size:1.9em;font-weight:800;line-height:1">{{ score }}</div><div style="font-size:.95em;font-weight:700">NILAI</div></div>
+        <div style="display:flex;flex-direction:column;align-items:center;padding:.35em .9em;border-radius:.6em;background:#123a6b;color:#ffd11a"><div style="font-size:1.9em;font-weight:800;line-height:1">{{ correctLabel }}</div><div style="font-size:.95em;font-weight:700">JAWABAN BENAR</div></div>
+      </div>
+      <div style="font-size:1.1em;line-height:1.35;color:#31465e;text-align:center;text-wrap:pretty">{{ lulusFeedback }}</div>
+      <div style="display:flex;flex-direction:column;gap:.3em">
+        <div style="font-size:1.05em;font-weight:800;color:#123a6b">PROFESI YANG PALING KAMU MINATI</div>
+        <div style="display:flex;flex-wrap:wrap;gap:.3em">
+          <sc-for list="{{ minatOpts }}" as="p" hint-placeholder-count="8">
+            <button type="button" onClick="{{ p.onClick }}" title="{{ p.title }}" style="padding:.3em .7em;border-radius:.5em;border:.14em solid {{ p.border }};background:{{ p.bg }};color:{{ p.color }};font-family:inherit;font-size:1.02em;font-weight:800;cursor:pointer">{{ p.name }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:.5em">
+        <input type="text" value="{{ nama }}" onChange="{{ onNamaChange }}" placeholder="Tulis namamu untuk sertifikat" style="flex:1;padding:.5em .7em;border-radius:.6em;border:.16em solid rgba(18,58,107,.35);background:#fff;color:#20364f;font-family:inherit;font-size:1.2em;font-weight:700;text-transform:uppercase;outline:none">
+        <button type="button" onClick="{{ onSertifikat }}" title="Buat sertifikat" style="padding:.5em 1.1em;border-radius:.7em;border:.2em solid #b07708;background:linear-gradient(#ffd75e,#f5a406);color:#3a2a06;font-family:inherit;font-size:1.2em;font-weight:800;letter-spacing:.03em;cursor:pointer;opacity:{{ sertifikatOpacity }}">🏅 BUAT SERTIFIKAT</button>
+      </div>
+      <div style="display:flex;justify-content:center;gap:.5em">
+        <button type="button" onClick="{{ onReview }}" title="Lihat pembahasan jawaban" style="padding:.4em 1em;border-radius:.6em;border:.16em solid rgba(18,58,107,.35);background:#fff;color:#123a6b;font-family:inherit;font-size:1.05em;font-weight:800;cursor:pointer">📋 PEMBAHASAN</button>
+        <button type="button" onClick="{{ onHome }}" title="Kembali ke Home" style="padding:.4em 1em;border-radius:.6em;border:.16em solid rgba(18,58,107,.35);background:#fff;color:#123a6b;font-family:inherit;font-size:1.05em;font-weight:800;cursor:pointer">🏠 HOME</button>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isGagal }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;inset:0;background-image:url(assets/s6/ulangi.webp);background-size:100% 100%;animation:evFade .3s ease both">
+    <div style="position:absolute;left:22%;top:42%;width:55%;height:42%;display:flex;flex-direction:column;gap:.6em;padding:1em 1.2em;animation:evPop .35s ease both">
+      <div style="display:flex;justify-content:center;gap:.7em">
+        <div style="display:flex;flex-direction:column;align-items:center;padding:.4em 1em;border-radius:.6em;background:#d63a34;color:#fff"><div style="font-size:2.1em;font-weight:800;line-height:1">{{ score }}</div><div style="font-size:1em;font-weight:700">NILAI</div></div>
+        <div style="display:flex;flex-direction:column;align-items:center;padding:.4em 1em;border-radius:.6em;background:#123a6b;color:#ffd11a"><div style="font-size:2.1em;font-weight:800;line-height:1">{{ correctLabel }}</div><div style="font-size:1em;font-weight:700">JAWABAN BENAR</div></div>
+      </div>
+      <div style="font-size:1.25em;line-height:1.4;color:#3a2a06;text-align:center;font-weight:700;text-wrap:pretty">{{ gagalFeedback }}</div>
+      <div style="font-size:1.15em;line-height:1.35;color:#5a4306;text-align:center;text-wrap:pretty">{{ gagalSaran }}</div>
+      <div style="display:flex;justify-content:center;gap:.6em">
+        <button type="button" onClick="{{ onRetry }}" title="Ulangi evaluasi" style="padding:.55em 1.5em;border-radius:.8em;border:.22em solid #b07708;background:linear-gradient(#ffd75e,#f5a406);color:#3a2a06;font-family:inherit;font-size:1.45em;font-weight:800;letter-spacing:.04em;cursor:pointer;animation:evGlow 2.4s ease-out infinite">🔄 ULANGI EVALUASI</button>
+        <button type="button" onClick="{{ onReview }}" title="Lihat pembahasan jawaban" style="padding:.55em 1.2em;border-radius:.8em;border:.18em solid #123a6b;background:#123a6b;color:#fff;font-family:inherit;font-size:1.2em;font-weight:800;cursor:pointer">📋 PEMBAHASAN</button>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isReview }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;inset:0;background:#0f1a26;animation:evFade .25s ease both">
+    <div style="position:absolute;inset:2.4% 2.2%;display:flex;flex-direction:column;gap:.7em;padding:1.1em 1.3em;border-radius:1.3em;border:.22em solid #123a6b;background:#fdf6e6">
+      <div style="flex:none;display:flex;align-items:center;gap:.8em">
+        <div style="padding:.3em .9em;border-radius:.6em;background:#123a6b;color:#ffd11a;font-size:1.25em;font-weight:800;letter-spacing:.06em">PEMBAHASAN</div>
+        <div style="flex:1;font-size:1.25em;font-weight:800;color:#123a6b">Nilai {{ score }} — {{ correctLabel }} jawaban benar</div>
+        <button type="button" onClick="{{ onCloseReview }}" title="Tutup pembahasan" style="padding:.45em 1.1em;border-radius:.7em;border:.18em solid #123a6b;background:#123a6b;color:#fff;font-family:inherit;font-size:1.15em;font-weight:800;cursor:pointer">TUTUP</button>
+      </div>
+      <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:.5em;overflow:auto;padding-right:.4em">
+        <sc-for list="{{ reviewList }}" as="r" hint-placeholder-count="6">
+          <div style="display:flex;gap:.7em;padding:.7em .9em;border-radius:.8em;background:#fff;border:.16em solid {{ r.border }}">
+            <div style="flex:none;width:2em;height:2em;display:flex;align-items:center;justify-content:center;border-radius:.45em;background:{{ r.badgeBg }};color:#fff;font-size:1.1em;font-weight:800">{{ r.mark }}</div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:.2em">
+              <div style="font-size:1.15em;font-weight:800;color:#123a6b;line-height:1.3">{{ r.no }}. {{ r.text }}</div>
+              <div style="font-size:1.05em;color:#31465e">Jawabanmu: <strong>{{ r.mine }}</strong></div>
+              <div style="font-size:1.05em;color:#1d6a26">Kunci: <strong>{{ r.key }}</strong></div>
+              <div style="font-size:1.02em;color:#5a6b7e;line-height:1.35">{{ r.why }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isSertifikat }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8em;padding:2% 2% 1.5%;background:#0f1a26;animation:evFade .3s ease both">
+    <div style="position:relative;flex:none;height:78%;aspect-ratio:1.414;max-width:92%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7em;padding:2em 2.4em;border-radius:1em;background:linear-gradient(#fffdf6,#fdf2d9);border:.5em solid #123a6b;box-shadow:0 1.2em 2.4em rgba(0,0,0,.55);animation:evPop .35s ease both">
+      <div style="position:absolute;inset:.7em;border:.18em dashed rgba(18,58,107,.35);border-radius:.6em;pointer-events:none"></div>
+      <div style="flex:none;font-size:1.2em;font-weight:800;letter-spacing:.18em;color:#8a5b04;text-align:center">MISI KONSTRUKSI: MENJELAJAH PROFESI TKP</div>
+      <div style="flex:none;font-size:3.2em;font-weight:800;letter-spacing:.06em;color:#123a6b;line-height:1;text-align:center">SERTIFIKAT KELULUSAN</div>
+      <div style="flex:none;width:22%;height:.25em;background:#f5a406;border-radius:.2em"></div>
+      <div style="flex:none;font-size:1.25em;color:#31465e;white-space:nowrap">Diberikan kepada</div>
+      <div style="flex:none;max-width:88%;font-size:2.8em;font-weight:800;color:#1d6a26;letter-spacing:.02em;text-align:center;line-height:1.15">{{ nama }}</div>
+      <div style="flex:none;max-width:80%;font-size:1.25em;line-height:1.5;color:#31465e;text-align:center;text-wrap:pretty">karena telah menyelesaikan evaluasi akhir pembelajaran <strong>8 Profesi Teknik Konstruksi dan Perumahan</strong> dengan hasil memuaskan.</div>
+      <div style="flex:none;display:flex;gap:.8em">
+        <div style="display:flex;flex-direction:column;align-items:center;padding:.45em 1.2em;border-radius:.7em;background:#123a6b;color:#ffd11a"><div style="font-size:2em;font-weight:800;line-height:1">{{ score }}</div><div style="font-size:1em;font-weight:700">NILAI AKHIR</div></div>
+        <div style="display:flex;flex-direction:column;align-items:center;padding:.45em 1.2em;border-radius:.7em;background:#2e9c3a;color:#fff"><div style="font-size:2em;font-weight:800;line-height:1">LULUS</div><div style="font-size:1em;font-weight:700">PREDIKAT {{ predikat }}</div></div>
+        <div style="display:flex;flex-direction:column;align-items:center;padding:.45em 1.2em;border-radius:.7em;background:#fff;border:.16em solid rgba(18,58,107,.3);color:#123a6b"><div style="font-size:1.35em;font-weight:800;line-height:1.2">{{ minatLabel }}</div><div style="font-size:1em;font-weight:700">MINAT KARIER</div></div>
+      </div>
+      <div style="flex:none;font-size:1.15em;color:#5a6b7e">{{ tanggal }}</div>
+    </div>
+    <div style="flex:none;display:flex;gap:.6em" data-print-hide="1">
+      <button type="button" onClick="{{ onPrint }}" title="Cetak atau simpan sertifikat" style="padding:.55em 1.3em;border-radius:.8em;border:.22em solid #b07708;background:linear-gradient(#ffd75e,#f5a406);color:#3a2a06;font-family:inherit;font-size:1.3em;font-weight:800;letter-spacing:.04em;cursor:pointer">🖨️ CETAK SERTIFIKAT</button>
+      <button type="button" onClick="{{ onCloseSertifikat }}" title="Kembali ke hasil evaluasi" style="padding:.55em 1.2em;border-radius:.8em;border:.18em solid rgba(255,255,255,.5);background:rgba(18,58,107,.9);color:#fff;font-family:inherit;font-size:1.3em;font-weight:800;cursor:pointer">❮ KEMBALI</button>
+      <button type="button" onClick="{{ onHome }}" title="Kembali ke Home" style="padding:.55em 1.2em;border-radius:.8em;border:.18em solid rgba(255,255,255,.5);background:rgba(18,58,107,.9);color:#fff;font-family:inherit;font-size:1.3em;font-weight:800;cursor:pointer">🏠 HOME</button>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ showToast }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;left:50%;bottom:4%;transform:translateX(-50%);padding:.6em 1.5em;border-radius:2em;background:rgba(12,17,22,.9);border:.15em solid rgba(255,255,255,.35);color:#fff;font-size:1.3em;font-weight:700;z-index:60;pointer-events:none">{{ toast }}</div>
+</sc-if>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:720}}">
+const PROFS = ['MANDOR','SURVEYOR','ESTIMATOR','LOGISTIK','PENGAWAS','PELAKSANA','ASISTEN','ADMIN TEKNIK'];
+
+const BANK = [
+  {id:'q1', kind:'mcq', prof:'MANDOR',
+   text:'Apakah tugas dan peran utama seorang Mandor dalam operasional harian di lokasi konstruksi perumahan?',
+   opts:['Menandatangani kontrak legal pembiayaan proyek dengan pemilik lahan.','Mengarahkan, membagi tugas, dan mengawasi pekerjaan harian para tukang di lapangan.','Mengukur beda tinggi permukaan tanah menggunakan alat Total Station.','Menyusun Rencana Anggaran Biaya (RAB) dan mengkalkulasi kebutuhan semen.','Menerbitkan surat teguran resmi kepada kontraktor utama jika terjadi keretakan struktur.'],
+   ans:1, why:'Mandor memimpin operasional harian para tukang di lapangan.'},
+  {id:'q2', kind:'mcq', prof:'SURVEYOR',
+   text:'Tugas krusial apakah yang dilakukan seorang Surveyor sebelum penggalian fondasi bangunan rumah dimulai?',
+   opts:['Menentukan titik koordinat batas lahan dan elevasi bangunan (setting out).','Menghitung total gaji dan upah harian para tukang kayu.','Membeli material besi beton dari distributor luar.','Menyimpan nota pembelian dan surat jalan pengiriman barang di gudang.','Membuat draf tagihan progres fisik (termyn) kepada pemilik proyek.'],
+   ans:0, why:'Setting out menentukan posisi dan elevasi bangunan sebelum galian dimulai.'},
+  {id:'q3', kind:'mcq', prof:'ESTIMATOR',
+   text:'Dokumen acuan utama apakah yang dihitung seorang Estimator untuk menghasilkan Rencana Anggaran Biaya (RAB)?',
+   opts:['Surat jalan pengiriman material dan daftar absensi pekerja.','Gambar kerja (engineering drawing) dan Rencana Kerja dan Syarat-syarat (RKS).','Buku kas umum dan nota pembelian alat pelindung diri (APD).','Laporan cuaca mingguan dan sertifikat tanah pemilik perumahan.','Surat Izin Mendirikan Bangunan (IMB) dan struktur organisasi kelurahan.'],
+   ans:1, why:'Volume dan biaya dihitung dari gambar kerja beserta RKS.'},
+  {id:'q4', kind:'mcq', prof:'LOGISTIK',
+   text:'Prosedur awal apa yang harus dijalankan petugas Logistik saat truk pengangkut semen tiba di gudang proyek?',
+   opts:['Langsung menginstruksikan tukang untuk mengaduk semen dengan pasir.','Memeriksa kesesuaian jumlah, jenis, dan kondisi fisik material berdasarkan surat jalan.','Membayar tunai seluruh harga material kepada pengemudi truk tanpa kuitansi.','Menguji kuat tekan beton di laboratorium uji bahan.','Mengubah spesifikasi bahan yang dipesan sesuai keinginan pribadi.'],
+   ans:1, why:'Penerimaan material selalu diawali pemeriksaan terhadap surat jalan.'},
+  {id:'q5', kind:'mcq', prof:'PENGAWAS',
+   text:'Jika inspeksi menemukan kolom beton keropos dan membahayakan struktur, tindakan berwenang apa yang harus diambil Pengawas Lapangan?',
+   opts:['Membiarkan pengerjaan tetap berjalan agar tidak terlambat dari jadwal.','Menerbitkan surat instruksi perbaikan atau penghentian pekerjaan sementara (stop work order).','Mengambil alih pengerjaan adonan beton secara langsung menggantikan tukang.','Menambah anggaran biaya proyek tanpa mengonfirmasi pemilik perumahan.','Memutus kontrak kerja seluruh tim arsitek perencana.'],
+   ans:1, why:'Pengawas berwenang menerbitkan instruksi perbaikan atau stop work order.'},
+  {id:'q6', kind:'mcq', prof:'PELAKSANA',
+   text:'Instrumen manajemen waktu manakah yang digunakan Pelaksana Lapangan untuk mengontrol kemajuan fisik pekerjaan mingguan?',
+   opts:['Waterpass dan rambu ukur.','Kurva S (S-Curve) dan Jadwal Pelaksanaan (Master Schedule).','Kalkulator finansial dan kuitansi pembayaran.','Lembar berita acara serah terima kunci rumah.','Draf gambar purna laksana (As-Built Drawing).'],
+   ans:1, why:'Kurva S dan master schedule dipakai mengendalikan progres pekerjaan.'},
+  {id:'q7', kind:'mcq', prof:'ASISTEN',
+   text:'Keterampilan teknis manakah yang penting dikuasai seorang Asisten Teknik untuk membantu Pelaksana di lapangan?',
+   opts:['Membaca gambar detail CAD dan mendokumentasikan volume pencatatan fisik harian.','Menegosiasikan harga beli tanah kavling kepada warga sekitar.','Memperbaiki mesin traktor dan kendaraan operasional proyek yang rusak.','Menyusun undang-undang ketenagakerjaan dan jaminan sosial pekerja.','Menghitung margin keuntungan bersih penjualan unit perumahan.'],
+   ans:0, why:'Asisten Teknik mendukung pekerjaan teknis: membaca gambar dan mencatat volume harian.'},
+  {id:'q8', kind:'mcq', prof:'ADMIN TEKNIK',
+   text:'Dokumen teknis penting apakah yang dikelola dan diarsip Admin Teknik pada tahap penutupan proyek perumahan?',
+   opts:['Laporan slip gaji tukang minggu pertama.','Gambar terpasang akhir (As-Built Drawing) dan Berita Acara Serah Terima (BAST).','Brosur promosi penjualan rumah di media sosial.','Daftar inventaris alat makan di kantin proyek.','Surat permohonan sumbangan warga sekitar.'],
+   ans:1, why:'Penutupan proyek membutuhkan As-Built Drawing dan BAST yang lengkap.'},
+
+  {id:'q9', kind:'tf', prof:'MANDOR', ans:true,
+   text:'"Mandor berfungsi sebagai penghubung komunikasi teknis antara instruksi Pelaksana Lapangan dengan pelaksanaan kerja para tukang."',
+   why:'Mandor menerjemahkan gambar kerja/instruksi pelaksana ke pekerjaan harian tukang.'},
+  {id:'q10', kind:'tf', prof:'SURVEYOR', ans:false,
+   text:'"Peralatan utama Surveyor untuk mengukur sudut horizontal, sudut vertikal, dan jarak presisi adalah kalkulator bisnis dan mistar plastik."',
+   why:'Alat utamanya adalah Total Station, theodolite, atau waterpass.'},
+  {id:'q11', kind:'tf', prof:'ESTIMATOR', ans:true,
+   text:'"Kesalahan perhitungan volume material oleh Estimator dapat berdampak langsung pada pembengkakan anggaran atau kerugian proyek."',
+   why:'Akurasi Estimator menentukan efisiensi RAB.'},
+  {id:'q12', kind:'tf', prof:'LOGISTIK', ans:false,
+   text:'"Staf Logistik berwenang mengubah spesifikasi mutu besi beton yang tertulis di RKS secara sepihak tanpa persetujuan tim perencanaan."',
+   why:'Logistik menyediakan material sesuai spesifikasi RKS, bukan mengubahnya.'},
+  {id:'q13', kind:'tf', prof:'PENGAWAS', ans:true,
+   text:'"Pengawas Lapangan bertugas mewakili kepentingan pemilik proyek untuk memverifikasi mutu dan kualitas hasil pekerjaan kontraktor."',
+   why:'Pengawas adalah perpanjangan tangan pemilik proyek dalam pengendalian mutu.'},
+  {id:'q14', kind:'tf', prof:'PELAKSANA', ans:true,
+   text:'"Tanggung jawab utama Pelaksana Lapangan adalah mengatur jadwal pelaksanaan harian, metode kerja, dan pengorganisasian tim kontraktor."',
+   why:'Pelaksana adalah manajer operasional proyek di pihak kontraktor.'},
+  {id:'q15', kind:'tf', prof:'ASISTEN', ans:false,
+   text:'"Tugas harian Asisten Teknik adalah langsung mengaduk semen dan memasang batu bata bersama para tukang."',
+   why:'Asisten Teknik mendukung pekerjaan teknis, bukan bekerja sebagai tukang.'},
+  {id:'q16', kind:'tf', prof:'ADMIN TEKNIK', ans:true,
+   text:'"Admin Teknik bertanggung jawab menyusun Berita Acara Kemajuan Pekerjaan (termyn) sebagai berkas verifikasi pencairan dana proyek."',
+   why:'Admin Teknik mengelola kelengkapan administrasi teknis dan dokumen pembayaran progres.'},
+
+  {id:'q17', kind:'short', aOpts:["Logistik","Estimator","Surveyor"], bOpts:["Menolak dan mengembalikan ke pemasok","Tetap dipakai untuk lantai kerja","Disimpan di gudang terbuka"], prof:'LOGISTIK',
+   head:'Truk pengangkut semen tiba saat hujan deras. Saat muatan dibuka, sebagian semen terkena air dan mulai mengeras (rusak).',
+   text:'Profesi mana yang bertanggung jawab memeriksa dan apa tindakannya terhadap material tersebut?',
+   profKeys:['logistik'], actKeys:['tolak','menolak','kembalikan','mengembalikan','retur','nota penolakan','ganti'],
+   bLabel:'TINDAKAN TERHADAP MATERIAL', bPlaceholder:'contoh: menolak dan mengembalikan ke pemasok',
+   key:'Logistik; menolak semen yang rusak dan mengembalikannya ke pemasok.',
+   why:'Logistik memeriksa material saat diterima dan menolak material yang tidak sesuai/rusak.'},
+  {id:'q18', kind:'short', aOpts:["Pengawas","Admin Teknik","Logistik"], bOpts:["Surat instruksi perbaikan","Nota pembelian material","Jadwal pengiriman material"], prof:'PENGAWAS',
+   head:'Saat inspeksi lantai 2, kolom utama ditemukan retak dan dimensinya tidak sesuai gambar rencana.',
+   text:'Profesi apa yang berwenang menolak pekerjaan cacat itu dan menerbitkan surat instruksi perbaikan?',
+   profKeys:['pengawas','supervising','konsultan pengawas'], actKeys:['instruksi perbaikan','teguran','stop work','hentikan','penghentian','perbaikan'],
+   bLabel:'SURAT / TINDAKAN YANG DITERBITKAN', bPlaceholder:'contoh: surat instruksi perbaikan',
+   key:'Pengawas Lapangan; menerbitkan surat instruksi perbaikan teknis.',
+   why:'Pengawas berwenang menolak pekerjaan cacat dan menerbitkan instruksi perbaikan/stop work order.'},
+  {id:'q19', kind:'short', aOpts:["Surveyor","Mandor","Asisten"], bOpts:["Total station","Mesin molen","Alat pemadat tanah"], prof:'SURVEYOR',
+   head:'Sebelum galian tanah dan pembuatan bouwplank, titik koordinat batas tapak dan elevasi kedalaman harus presisi agar tidak melanggar batas lahan tetangga.',
+   text:'Sebutkan profesi yang menentukan titik koordinat tersebut beserta satu nama alat presisinya!',
+   profKeys:['surveyor'], actKeys:['total station','theodolite','teodolit','waterpass','gps'],
+   bLabel:'NAMA ALAT PRESISI', bPlaceholder:'contoh: total station',
+   key:'Surveyor; Total Station (atau theodolite/waterpass/GPS rover).',
+   why:'Surveyor melakukan setting out dengan alat ukur presisi seperti Total Station.'},
+  {id:'q20', kind:'short', aOpts:["Admin Teknik","Pelaksana","Pengawas"], bOpts:["Berita acara kemajuan pekerjaan","Gambar potongan struktur","Daftar hadir pekerja"], prof:'ADMIN TEKNIK',
+   head:'Struktur lantai 1 rampung 100%. Kontraktor mengajukan pembayaran termin (kemajuan fisik 30%) kepada owner.',
+   text:'Profesi mana yang mengumpulkan Berita Acara Kemajuan Pekerjaan, merapikan berkas penagihan, dan mengarsipkannya?',
+   profKeys:['admin','administrator'], actKeys:['berita acara','termyn','termin','arsip','penagihan','pencairan'],
+   bLabel:'DOKUMEN YANG DIKELOLA', bPlaceholder:'contoh: berita acara kemajuan pekerjaan',
+   key:'Admin Teknik; menyusun dan mengarsipkan Berita Acara Kemajuan Pekerjaan.',
+   why:'Admin Teknik mengelola berkas administrasi teknis termasuk dokumen penagihan termin.'}
+];
+
+function shuf(arr, seed) {
+  const a = arr.slice();
+  let s = seed * 2654435761 % 4294967296;
+  for (let i = a.length - 1; i > 0; i--) {
+    s = (s * 1103515245 + 12345) % 2147483648;
+    const j = s % (i + 1);
+    const t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+const norm = (t) => String(t || '').toLowerCase().replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+
+function __mkHub(){try{var w=window;for(var i=0;i<8&&w.parent&&w.parent!==w;i++){w=w.parent;if(w.__mkHub&&typeof w.__mkHub==='object')return w.__mkHub;}}catch(e){}return null;}
+function __mkLoad(k){var H=__mkHub(),r=null;try{r=H?(H.store||{})[k]:sessionStorage.getItem('mk_p_'+k);return r?JSON.parse(r):null;}catch(e){return null;}}
+function __mkSave(k,v){var s;try{s=JSON.stringify(v);}catch(e){return;}var H=__mkHub();if(H){H.store=H.store||{};H.store[k]=s;}else{try{sessionStorage.setItem('mk_p_'+k,s);}catch(e){}}}
+function __mkTakeGo(){var g=__mkLoad('go');if(g)__mkSave('go',null);return g;}
+var __MK_FILES=['1. Misi Konstruksi.dc.html','2. Scene Eksplorasi.dc.html','3. Tebak Profesi.dc.html','4. Pengalaman Kerja.dc.html','5. Profesi Pertama.dc.html','6. Scene Evaluasi.dc.html'];
+var __MK_NAMES=['Panduan','Eksplorasi 8 Profesi','Tebak Profesi','Pengalaman Kerja','Profesi Pertamaku','Evaluasi'];
+function __mkChecks(){var s1=__mkLoad('s1')||{},s2=__mkLoad('s2')||{},s3=__mkLoad('s3')||{},s4=__mkLoad('s4')||{},s5=__mkLoad('s5')||{};return [!!s1.done,!!(s2.ever||(s2.learned&&s2.learned.length>=8)),!!s3.ever,!!(s4.ever||(s4.done&&s4.done.length===8&&s4.done.every(Boolean))),!!(s5.ever||(s5.xp||0)>=900)];}
+function __mkLevel(){var c=__mkChecks(),L=0;while(L<5&&c[L])L++;return L;}
+function __mkAlert(title,html){var o=document.getElementById('__mkLock');if(o)o.remove();o=document.createElement('div');o.id='__mkLock';o.style.cssText='position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(8,14,22,.62);font-family:Trebuchet MS,sans-serif';o.innerHTML='<div style="max-width:min(86vw,34em);padding:1.6em 1.9em;border-radius:1.2em;border:.25em solid #fff;background:linear-gradient(#ffd84a,#f5a406);box-shadow:0 .6em 1.6em rgba(0,0,0,.45);color:#1a1208;text-align:center;font-size:clamp(14px,1.6vw,22px)"><div style="font-weight:900;font-size:1.4em;margin-bottom:.4em">'+title+'</div><div style="line-height:1.6;margin-bottom:1em">'+html+'</div><button type="button" style="font:inherit;font-weight:900;padding:.5em 1.6em;border-radius:2em;border:.18em solid #fff;background:#2170cd;color:#fff;cursor:pointer">OKE</button></div>';o.addEventListener('click',function(e){if(e.target===o||e.target.tagName==='BUTTON')o.remove();});document.body.appendChild(o);}
+function __mkLocked(i){var L=__mkLevel();__mkAlert('Misi '+__MK_NAMES[i]+' masih terkunci','Selesaikan dulu misi <b>'+__MK_NAMES[L]+'</b>'+(L>0?' dengan <b>skor maksimal</b>':'')+' untuk membuka misi berikutnya.');}
+function __mkGoEval(){var c=__mkChecks(),m=[];c.forEach(function(v,i){if(!v)m.push(__MK_NAMES[i]);});if(!m.length){__dcGo(__MK_FILES[5]);return;}__mkAlert('Evaluasi masih terkunci','Selesaikan dulu misi berikut dengan skor maksimal:<br><b>'+m.join('<br>')+'</b>');}
+function __mkGo(i,enter){if(i>=5){__mkGoEval();return;}if(i>__mkLevel()){__mkLocked(i);return;}__mkSave('go',enter?'enter'+i:null);__dcGo(__MK_FILES[i]);}
+function __mkNav(){window.__mkReady=1;var g=function(i){return function(){__mkGo(i,true);};};return {navPanduan:g(0),navEksplorasi:g(1),navTebak:g(2),navPengalaman:g(3),navProfesi:g(4),navEvaluasi:g(5)};}
+function __mkMapUrl(p){var H=__mkHub();if(H&&H.res)return H.res(p);var r=window.__resources;return (r&&r[p])||p;}
+var __MK_MAPS=[['s2','p-maps-panduan',[[21.5,66],[36,49],[54.5,36],[71.5,55],[81,33],[93.5,28]]],['s2','p-map-eksplorasi',[[19.5,63],[34,48],[50.5,36],[65.5,54],[78.5,30],[92,27]]],['s3','p-maps-tebak',[[22,62],[36,49],[51,38],[65,49],[79.5,34],[92,28]]],['s4','p-world',[[21,66],[35.5,51],[51,40],[67,54],[80.5,35],[93,28]]],['s5','p-maps-profesi',[[21,65],[35.5,49],[51,39.5],[67,49],[81,32],[93.5,27]]]];
+function __mkMapVals(own,fn){if(own>=0&&fn&&!window.__mkEntered){window.__mkEntered=1;if(__mkLoad('go')==='enter'+own){__mkSave('go',null);setTimeout(function(){if(own===0)__mkSave('s1',{done:true});fn();},0);}}var L=__mkLevel(),m=__MK_MAPS[Math.min(L,4)],u=__mkMapUrl(['assets',m[0],m[1]+'.webp'].join('/'));return {mapSrc:u,mapBg:'url("'+u+'")',mapAllDone:L>=5,mapNodes:m[2].map(function(c,i){var open=i<=L;return {left:(c[0]-6)+'%',top:(c[1]-10.5)+'%',title:__MK_NAMES[i]+(open?'':' (terkunci)'),onClick:function(){if(!open){__mkLocked(i);return;}if(i===own&&fn){if(i===0)__mkSave('s1',{done:true});fn();}else __mkGo(i,true);}};})};}
+class Component extends DCLogic {
+  state = Object.assign({screen:'intro', order:[], optOrder:{}, ans:{}, idx:0, nama:'', minat:null}, (() => { const v = __mkLoad('s6'); if (v && v.screen === 'review') v.screen = 'hasil'; return v || {}; })(), {toast:'', recap:null, prevScreen:'hasil'});
+
+  componentDidUpdate(){ const s = this.state; __mkSave('s6', { screen: s.screen, order: s.order, optOrder: s.optOrder, ans: s.ans, idx: s.idx, nama: s.nama, minat: s.minat }); }
+  componentDidMount(){
+    let recap = null;
+    try { const raw = sessionStorage.getItem('mk_eval_recap'); if(raw) recap = JSON.parse(raw); } catch(e){}
+    this.setState({recap});
+  }
+  componentWillUnmount(){ clearTimeout(this._t); }
+
+  flash(t){ clearTimeout(this._t); this.setState({toast:t}); this._t = setTimeout(()=>this.setState({toast:''}), 2200); }
+
+  shuffledOpts(qi, which, list){
+    if(!Array.isArray(list) || !list.length) return [];
+    const seed = (Number(qi) || 0) + (which === 'a' ? 11 : 47);
+    return shuf(list, seed).map(v => ({ label: v }));
+  }
+
+  shuffle(arr){ const a = arr.slice(); for(let i=a.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; }
+
+  begin(){
+    const order = this.shuffle(BANK.map((_,i)=>i));
+    const optOrder = {};
+    BANK.forEach((q,i)=>{ if(q.kind==='mcq') optOrder[i] = this.shuffle(q.opts.map((_,k)=>k)); });
+    this.setState({screen:'quiz', order, optOrder, ans:{}, idx:0, nama:'', minat:null});
+  }
+
+  isFilled(qi){
+    const q = BANK[qi], a = this.state.ans[qi];
+    if(q.kind==='short'){ const o = a || {}; return !!(String(o.a||'').trim() && String(o.b||'').trim()); }
+    return !(a===undefined || a===null || String(a).trim()==='');
+  }
+
+  isCorrect(qi){
+    const q = BANK[qi], a = this.state.ans[qi];
+    if(!this.isFilled(qi)) return false;
+    if(q.kind==='mcq') return a === q.ans;
+    if(q.kind==='tf') return a === q.ans;
+    const ta = norm(a.a), tb = norm(a.b);
+    const hasProf = q.profKeys.some(k=>ta.indexOf(norm(k))>=0);
+    const hasAct = q.actKeys.some(k=>tb.indexOf(norm(k))>=0);
+    return hasProf && hasAct;
+  }
+
+  answeredCount(){ return this.state.order.filter(qi=>this.isFilled(qi)).length; }
+  correctCount(){ return this.state.order.filter(qi=>this.isCorrect(qi)).length; }
+
+  renderVals(){ return Object.assign(__mkNav(), this._rv()); }
+  _rv() {
+    const s = this.state;
+    const total = BANK.length;
+    const correct = s.order.length ? this.correctCount() : 0;
+    const score = correct * 5;
+    const answered = s.order.length ? this.answeredCount() : 0;
+    const qi = s.order.length ? s.order[Math.min(s.idx, s.order.length-1)] : 0;
+    const q = BANK[qi] || BANK[0];
+    const mine = s.ans[qi];
+    const optIdx = (s.optOrder[qi] || (q.opts ? q.opts.map((_,k)=>k) : []));
+    const TAG = ['A','B','C','D','E'];
+    const allAnswered = answered === total;
+    const recap = s.recap;
+    const minatName = s.minat !== null ? PROFS[s.minat] : '';
+
+    const mineLabel = (i)=>{
+      const b = BANK[i], a = s.ans[i];
+      if(!this.isFilled(i)) return 'tidak dijawab';
+      if(b.kind==='mcq') return b.opts[a];
+      if(b.kind==='tf') return a ? 'BENAR' : 'SALAH';
+      return `${a.a} — ${a.b}`;
+    };
+    const keyLabel = (i)=>{
+      const b = BANK[i];
+      if(b.kind==='mcq') return b.opts[b.ans];
+      if(b.kind==='tf') return b.ans ? 'BENAR' : 'SALAH';
+      return b.key;
+    };
+
+    return {
+      isIntro: s.screen==='intro',
+      isQuiz: s.screen==='quiz',
+      isLulus: s.screen==='hasil' && score > 75,
+      isGagal: s.screen==='hasil' && score <= 75,
+      isReview: s.screen==='review',
+      isSertifikat: s.screen==='sertifikat',
+
+      hasRecap: !!recap,
+      recapLabel: recap ? `Progres Profesi Pertamaku: ${recap.count||0} profesi selesai · ★ ${recap.xp||0} XP` : '',
+
+      onStart: ()=>this.begin(),
+      onRetry: ()=>{ this.begin(); this.flash('Evaluasi diacak ulang — semangat!'); },
+      onQuit: ()=>{ __dcGo('5. Profesi Pertama.dc.html'); },
+      onHome: ()=>{ __dcGo('1. Misi Konstruksi.dc.html'); },
+      onBackMateri: ()=>{ __dcGo('2. Scene Eksplorasi.dc.html'); },
+
+      qCounter: `Soal ${Math.min(s.idx+1, total)} / ${total}`,
+      progressPct: `${Math.round((answered/total)*100)}%`,
+      answeredLabel: `${answered}/${total} terjawab`,
+      qKind: q.kind==='mcq' ? 'PILIHAN GANDA' : (q.kind==='tf' ? 'BENAR / SALAH' : 'STUDI KASUS'),
+      qProf: q.prof,
+      qHasHead: !!q.head,
+      qHead: q.head || '',
+      qText: q.text,
+      qIsChoice: q.kind==='mcq' || q.kind==='tf',
+      qIsShort: q.kind==='short',
+      shortA: q.kind==='short' ? ((mine||{}).a || '') : '',
+      shortB: q.kind==='short' ? ((mine||{}).b || '') : '',
+      shortAPlaceholder: '',
+      aOpts: this.shuffledOpts(qi, 'a', q.aOpts),
+      bOpts: this.shuffledOpts(qi, 'b', q.bOpts),
+      shortBLabel: q.bLabel || 'TINDAKAN / ALAT',
+      shortBPlaceholder: '',
+      onShortA: (e)=>{ const v = e.target.value.toUpperCase(); this.setState(st=>({ans:{...st.ans, [qi]: {...(st.ans[qi]||{}), a:v}}})); },
+      onShortB: (e)=>{ const v = e.target.value.toUpperCase(); this.setState(st=>({ans:{...st.ans, [qi]: {...(st.ans[qi]||{}), b:v}}})); },
+
+      qOpts: q.kind==='mcq'
+        ? optIdx.map((oi,pos)=>{
+            const on = mine === oi;
+            return {text:q.opts[oi], tag:TAG[pos], title:`Pilih jawaban ${TAG[pos]}`,
+              bg: on ? '#123a6b' : '#f4f8fd', color: on ? '#fff' : '#26384c',
+              border: on ? '.18em solid #123a6b' : '.16em solid rgba(18,58,107,.2)',
+              tagBg: on ? '#ffd11a' : '#e0e8f2', tagColor: on ? '#3a2a06' : '#123a6b',
+              onClick: ()=>this.setState(st=>({ans:{...st.ans, [qi]: oi}}))};
+          })
+        : (q.kind==='tf'
+            ? [true,false].map((v,pos)=>{
+                const on = mine === v;
+                return {text: v ? 'BENAR' : 'SALAH', tag: v ? '✓' : '✕', title:`Pilih ${v?'BENAR':'SALAH'}`,
+                  bg: on ? (v ? '#2e9c3a' : '#d63a34') : '#f4f8fd', color: on ? '#fff' : '#26384c',
+                  border: on ? '.18em solid rgba(0,0,0,.25)' : '.16em solid rgba(18,58,107,.2)',
+                  tagBg: on ? 'rgba(255,255,255,.25)' : '#e0e8f2', tagColor: on ? '#fff' : '#123a6b',
+                  onClick: ()=>this.setState(st=>({ans:{...st.ans, [qi]: v}}))};
+              })
+            : []),
+
+      dots: s.order.map((oqi,pos)=>{
+        const filled = this.isFilled(oqi);
+        const cur = pos === s.idx;
+        return {no:`${pos+1}`, title:`Buka soal ${pos+1}`,
+          bg: cur ? '#f5a406' : (filled ? '#2e9c3a' : '#fff'),
+          color: (cur || filled) ? '#fff' : '#7b8a9c',
+          border: cur ? '#b07708' : (filled ? '#1d6a26' : 'rgba(18,58,107,.25)'),
+          onClick: ()=>this.setState({idx:pos})};
+      }),
+
+      prevOpacity: s.idx > 0 ? 1 : .4,
+      showNext: s.idx < total - 1,
+      navHint: allAnswered ? 'Semua soal sudah dijawab — kamu bisa menyelesaikan evaluasi.' : `Masih ada ${total - answered} soal yang belum dijawab.`,
+      finishOpacity: allAnswered ? 1 : .45,
+      onPrev: ()=>{ if(s.idx>0) this.setState({idx:s.idx-1}); },
+      onNext: ()=>{ if(s.idx < total-1) this.setState({idx:s.idx+1}); },
+      onFinish: ()=>{
+        if(this.answeredCount() < total){ this.flash('Jawab semua soal dulu sebelum melihat nilai'); return; }
+        this.setState({screen:'hasil'});
+      },
+
+      score: `${score}`,
+      correctLabel: `${correct}/${total}`,
+      lulusFeedback: score === 100
+        ? 'Sempurna! Semua soal kamu jawab dengan benar — pemahamanmu tentang 8 profesi konstruksi sangat baik.'
+        : `Kerja bagus! Kamu menjawab benar ${correct} dari ${total} soal dan dinyatakan LULUS evaluasi.`,
+      gagalFeedback: `Nilaimu ${score} — batas lulus adalah di atas 75. Kamu sudah menjawab benar ${correct} dari ${total} soal.`,
+      gagalSaran: 'Pelajari kembali tugas, alat, dan wewenang setiap profesi, lalu ulangi evaluasi. Kamu pasti bisa!',
+
+      minatOpts: PROFS.map((n,i)=>{
+        const on = s.minat === i;
+        return {name:n, title:`Pilih ${n} sebagai profesi yang paling diminati`,
+          bg: on ? '#2e9c3a' : '#fff', color: on ? '#fff' : '#26384c',
+          border: on ? '#1d6a26' : 'rgba(18,58,107,.25)',
+          onClick: ()=>this.setState({minat:i})};
+      }),
+      nama: s.nama,
+      onNamaChange: (e)=>{ const v = e.target.value.toUpperCase(); this.setState({nama:v}); },
+      sertifikatOpacity: s.nama.trim() ? 1 : .5,
+      onSertifikat: ()=>{
+        if(!s.nama.trim()){ this.flash('Tulis namamu dulu untuk dicetak di sertifikat'); return; }
+        if(s.minat === null){ this.flash('Pilih dulu profesi yang paling kamu minati'); return; }
+        this.setState({screen:'sertifikat'});
+      },
+      onCloseSertifikat: ()=>this.setState({screen:'hasil'}),
+      onPrint: ()=>{ window.print(); },
+      predikat: score === 100 ? 'ISTIMEWA' : (score >= 90 ? 'SANGAT BAIK' : 'BAIK'),
+      minatLabel: minatName || '-',
+      tanggal: new Date().toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'}),
+
+      onReview: ()=>this.setState({prevScreen:'hasil', screen:'review'}),
+      onCloseReview: ()=>this.setState({screen:'hasil'}),
+      reviewList: s.order.map((oqi,pos)=>{
+        const ok = this.isCorrect(oqi);
+        return {no:`${pos+1}`, text:BANK[oqi].text, mine:mineLabel(oqi), key:keyLabel(oqi), why:BANK[oqi].why,
+          mark: ok ? '✓' : '✕', badgeBg: ok ? '#2e9c3a' : '#d63a34', border: ok ? 'rgba(46,156,58,.5)' : 'rgba(214,58,52,.5)'};
+      }),
+
+      showToast: !!s.toast,
+      toast: s.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

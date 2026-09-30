@@ -1,0 +1,15 @@
+/* GENERATED dari mockup/2. Scene Eksplorasi.dc.html */
+html,body{margin:0;padding:0;background:#0c1116;overflow:hidden;height:100%}
+@keyframes s2Fade{from{opacity:0}to{opacity:1}}
+@keyframes s2Pop{0%{transform:scale(.9);opacity:0}60%{transform:scale(1.02);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes s2Pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,214,26,.85)}70%{box-shadow:0 0 0 1.2em rgba(255,214,26,0)}}
+@keyframes s2Check{0%{transform:scale(0) rotate(-40deg);opacity:0}70%{transform:scale(1.18) rotate(4deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
+@keyframes s2Toast{0%{transform:translate(-50%,1em);opacity:0}12%{transform:translate(-50%,0);opacity:1}80%{opacity:1}100%{opacity:0}}
+a{color:#f4ab03}a:hover{color:#ffd257}
+.s2p0:hover{transform:scale(1.05) !important}
+.s2p1:active{transform:scale(.97) !important}
+.s2p2:hover{transform:scale(1.07) !important}
+.s2p3:active{transform:scale(.95) !important}
+.s2p4:hover{transform:scale(1.045) !important;border-color:rgba(255,209,26,.95) !important;box-shadow:0 0 1.6em rgba(255,209,26,.55) !important}
+.s2p5:active{transform:scale(.98) !important}
+.s2p6:hover{transform:scale(1.04) !important}

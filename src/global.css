@@ -1,0 +1,14 @@
+/* Setara FULL_PAGE_CSS di mockup/support.js + aturan html/body di <helmet> setiap scene. */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #0c1116;
+  overflow: hidden;
+  height: 100%;
+}
+
+#root,
+#root > .sc-host {
+  height: 100%;
+}

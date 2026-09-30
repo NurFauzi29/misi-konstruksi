@@ -1,0 +1,23 @@
+/* GENERATED dari mockup/1. Misi Konstruksi.dc.html */
+html,body{margin:0;padding:0;background:#0c1116;overflow:hidden;height:100%}
+@keyframes mkPop{0%{transform:scale(.86);opacity:0}60%{transform:scale(1.02);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes mkFade{from{opacity:0}to{opacity:1}}
+@keyframes mkTitle{from{transform:rotate(-2deg) scale(.94);opacity:0}to{transform:rotate(-2deg) scale(1);opacity:1}}
+@keyframes mkToast{0%{transform:translate(-50%,1em);opacity:0}12%{transform:translate(-50%,0);opacity:1}80%{opacity:1}100%{opacity:0}}
+@keyframes spFade{from{opacity:0}to{opacity:1}}
+@keyframes spPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,214,26,.85)}70%{box-shadow:0 0 0 1.2em rgba(255,214,26,0)}}
+@keyframes s2Fade{from{opacity:0}to{opacity:1}}
+@keyframes s2Pop{0%{transform:scale(.9);opacity:0}60%{transform:scale(1.02);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes s2Pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,214,26,.85)}70%{box-shadow:0 0 0 1.2em rgba(255,214,26,0)}}
+@keyframes s2Check{0%{transform:scale(0) rotate(-40deg);opacity:0}70%{transform:scale(1.18) rotate(4deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
+a{color:#f4ab03}a:hover{color:#ffd257}
+.s1p0:hover{transform:scale(1.08) !important;filter:brightness(1.1) !important}
+.s1p1:active{transform:scale(.94) !important}
+.s1p2:hover{transform:translateY(-.5em) scale(1.03) !important;filter:brightness(1.08) !important}
+.s1p3:active{transform:translateY(.1em) scale(.98) !important}
+.s1p4:hover{transform:scale(1.1) rotate(90deg) !important}
+.s1p5:hover{transform:scale(1.05) !important}
+.s1p6:active{transform:scale(.97) !important}
+.s1p7:hover{transform:scale(1.07) !important}
+.s1p8:active{transform:scale(.95) !important}
+.s1p9:hover{transform:scale(1.04) !important}
