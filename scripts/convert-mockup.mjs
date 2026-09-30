@@ -52,6 +52,15 @@ const cssToObj = (css) => {
   return o;
 };
 
+// Nvw / Nvh → ukuran viewport yang terlihat (variabel diisi src/main.tsx; lihat src/global.css).
+// Di desktop hasilnya sama persis dengan vw/vh; di HP stage tidak lagi terpotong address bar.
+const viewportUnits = (css) => css.replace(/(\d*\.?\d+)v([wh])\b/g, (_, n, a) => `calc(var(--v${a}, 1v${a}) * ${n})`);
+
+// Npx literal di template → ikut skala stage. Mockup dirancang pada stage 1280px (1em stage = --u = 12,8px),
+// jadi di 1280×720 hasilnya sama persis; di layar lain tidak lagi "terkunci" ukuran pixel.
+// Nilai px dari {{ … }} (mis. posisi pointer saat drag) tidak tersentuh.
+const stagePx = (css) => css.replace(/(^|[^\w.-])(\d*\.?\d+)px\b/g, (_, pre, n) => `${pre}calc(var(--u) * ${n} / 12.8)`);
+
 // ---------- pseudo.ts (support.js): deklarasi :hover/:active diberi !important ----------
 function importantify(css) {
   const decls = [];
@@ -235,9 +244,10 @@ function convertScene(file, n) {
       else if (key.startsWith('on')) key = EVENT_MAP[key] || 'on' + key[2].toUpperCase() + key.slice(3);
       else if (key.includes('-') && !key.startsWith('aria-') && !key.startsWith('data-')) key = kebabToCamel(key);
 
-      let [code, dynamic] = compileAttr(value, scope);
+      const raw = key === 'style' ? stagePx(viewportUnits(value)) : value;
+      let [code, dynamic] = compileAttr(raw, scope);
       if (key === 'style') {
-        code = dynamic ? `cssToObj(${code})` : JSON.stringify(cssToObj(value));
+        code = dynamic ? `cssToObj(${code})` : JSON.stringify(cssToObj(raw));
         dynamic = true;
       } else if ((key === 'value' || key === 'checked') && dynamic) {
         code = `${wrap(code)} ?? ${key === 'checked' ? 'false' : '""'}`;

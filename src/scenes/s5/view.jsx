@@ -5,8 +5,8 @@ import { arr, cssToObj, interp, str } from '../../dc/runtime.jsx';
 export default function View({ $v }) {
   return (
     <>
-    <div style={{"width":"100%","height":"100vh","display":"flex","alignItems":"center","justifyContent":"center","background":"#0c1116","fontFamily":"'Trebuchet MS',sans-serif"}}>
-      <div style={{"position":"relative","width":"min(100vw,177.78vh)","height":"min(56.25vw,100vh)","fontSize":"min(1vw,1.7778vh)","overflow":"hidden","background":"#0f1a26","boxShadow":"0 0 4em rgba(0,0,0,.6)"}}>
+    <div style={{"width":"100%","height":"calc(var(--vh, 1vh) * 100)","display":"flex","alignItems":"center","justifyContent":"center","background":"#0c1116","fontFamily":"'Trebuchet MS',sans-serif"}}>
+      <div style={{"position":"relative","width":"min(calc(var(--vw, 1vw) * 100),calc(var(--vh, 1vh) * 177.78))","height":"min(calc(var(--vw, 1vw) * 56.25),calc(var(--vh, 1vh) * 100))","fontSize":"min(calc(var(--vw, 1vw) * 1),calc(var(--vh, 1vh) * 1.7778))","overflow":"hidden","background":"#0f1a26","boxShadow":"0 0 4em rgba(0,0,0,.6)"}}>
         {$v.isSplash ? (
           <>
             {"\n  "}
@@ -94,7 +94,7 @@ export default function View({ $v }) {
               {"\n    "}
               <div style={{"position":"absolute","right":"1.8%","top":"1.6%","display":"flex","alignItems":"center","gap":".55em","zIndex":"40"}}>
                 {"\n      "}
-                <button type="button" onClick={$v.toggleSound} title="Nyalakan / matikan suara" style={{"width":"44px","height":"44px","display":"flex","alignItems":"center","justifyContent":"center","borderRadius":"50%","border":".2em solid #fff","background":"linear-gradient(#5aa9f2,#2170cd 62%,#12508f)","cursor":"pointer","boxShadow":"0 .3em .5em rgba(0,0,0,.35)","transition":"transform .15s ease"}} className="s5p2">
+                <button type="button" onClick={$v.toggleSound} title="Nyalakan / matikan suara" style={{"width":"calc(var(--u) * 44 / 12.8)","height":"calc(var(--u) * 44 / 12.8)","display":"flex","alignItems":"center","justifyContent":"center","borderRadius":"50%","border":".2em solid #fff","background":"linear-gradient(#5aa9f2,#2170cd 62%,#12508f)","cursor":"pointer","boxShadow":"0 .3em .5em rgba(0,0,0,.35)","transition":"transform .15s ease"}} className="s5p2">
                   {"\n        "}
                   <svg viewBox="0 0 24 24" aria-hidden="true" style={{"width":"62%","height":"62%"}}>
                     <path d="M4 9.5h3.2L12 5.4v13.2L7.2 14.5H4z" fill="#fff" />
@@ -104,7 +104,7 @@ export default function View({ $v }) {
                   {"\n      "}
                 </button>
                 {"\n      "}
-                <button type="button" onClick={$v.onHome} title="Kembali ke Home" style={{"width":"44px","height":"44px","display":"flex","alignItems":"center","justifyContent":"center","borderRadius":"50%","border":".2em solid #fff","background":"linear-gradient(#ffb23e,#f57c00 62%,#cf5a00)","cursor":"pointer","boxShadow":"0 .3em .5em rgba(0,0,0,.35)","transition":"transform .15s ease"}} className="s5p2">
+                <button type="button" onClick={$v.onHome} title="Kembali ke Home" style={{"width":"calc(var(--u) * 44 / 12.8)","height":"calc(var(--u) * 44 / 12.8)","display":"flex","alignItems":"center","justifyContent":"center","borderRadius":"50%","border":".2em solid #fff","background":"linear-gradient(#ffb23e,#f57c00 62%,#cf5a00)","cursor":"pointer","boxShadow":"0 .3em .5em rgba(0,0,0,.35)","transition":"transform .15s ease"}} className="s5p2">
                   {"\n        "}
                   <svg viewBox="0 0 24 24" aria-hidden="true" style={{"width":"62%","height":"62%"}}>
                     <path d="M12 3.6 3.4 11h2.3v9.4h5.1v-5.6h2.4v5.6h5.1V11h2.3z" fill="#fff" />
@@ -146,7 +146,7 @@ export default function View({ $v }) {
               {"\n\n    "}
               <div style={{"position":"absolute","right":"1.8%","top":"1.6%","display":"flex","alignItems":"center","gap":".55em","zIndex":"40"}}>
                 {"\n      "}
-                <button type="button" onClick={$v.toggleSound} title="Nyalakan / matikan suara" style={{"width":"40px","height":"40px","display":"flex","alignItems":"center","justifyContent":"center","borderRadius":"50%","border":".2em solid #fff","background":"linear-gradient(#5aa9f2,#2170cd 62%,#12508f)","cursor":"pointer","boxShadow":"0 .3em .5em rgba(0,0,0,.35)","transition":"transform .15s ease"}} className="s5p2">
+                <button type="button" onClick={$v.toggleSound} title="Nyalakan / matikan suara" style={{"width":"calc(var(--u) * 40 / 12.8)","height":"calc(var(--u) * 40 / 12.8)","display":"flex","alignItems":"center","justifyContent":"center","borderRadius":"50%","border":".2em solid #fff","background":"linear-gradient(#5aa9f2,#2170cd 62%,#12508f)","cursor":"pointer","boxShadow":"0 .3em .5em rgba(0,0,0,.35)","transition":"transform .15s ease"}} className="s5p2">
                   {"\n        "}
                   <svg viewBox="0 0 24 24" aria-hidden="true" style={{"width":"62%","height":"62%"}}>
                     <path d="M4 9.5h3.2L12 5.4v13.2L7.2 14.5H4z" fill="#fff" />

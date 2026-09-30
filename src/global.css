@@ -12,3 +12,45 @@ body {
 #root > .sc-host {
   height: 100%;
 }
+
+/* Cegah Safari iOS / Chrome Android memperbesar teks sendiri (mis. saat HP diputar ke landscape). */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/*
+ * --vw / --vh = 1% viewport yang benar-benar terlihat (diisi main.tsx). Di HP, 1vh CSS dihitung
+ * seolah address bar tersembunyi sehingga stage terpotong; konverter mengganti Nvw/Nvh di template
+ * menjadi calc(var(--vw, 1vw) * N).
+ *
+ * --u = font dasar stage (1em stage). <button>/<input> tidak mewarisi font-size (bawaan browser 13,333px),
+ * padahal ukuran tombol di mockup memakai em — akibatnya tombol tidak ikut mengecil di layar kecil.
+ * Di sini font kontrol dibuat mengikuti skala stage, dikalibrasi agar pada stage 1280px (--u = 12,8px)
+ * hasilnya tetap 13,333px seperti mockup.
+ */
+:root {
+  --u: min(var(--vw, 1vw), calc(var(--vh, 1vh) * 1.7778));
+}
+
+button,
+input,
+select,
+textarea {
+  font-size: calc(var(--u) * 1.041667);
+}
+
+/*
+ * Padding & border bawaan kontrol juga dalam px tetap (Chromium: button 1px 6px / 2px, input 1px 2px / 2px).
+ * Tanpa ini, ikon ukuran % di dalam tombol kecil tertekan padding 12px. Nilainya sama dengan bawaan
+ * Chromium pada stage 1280px; style inline dari mockup tetap menang.
+ */
+button {
+  padding: calc(var(--u) * 1 / 12.8) calc(var(--u) * 6 / 12.8);
+  border-width: calc(var(--u) * 2 / 12.8);
+}
+
+input {
+  padding: calc(var(--u) * 1 / 12.8) calc(var(--u) * 2 / 12.8);
+  border-width: calc(var(--u) * 2 / 12.8);
+}

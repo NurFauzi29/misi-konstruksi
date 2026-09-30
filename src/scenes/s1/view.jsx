@@ -5,8 +5,8 @@ import { arr, cssToObj, interp, str } from '../../dc/runtime.jsx';
 export default function View({ $v }) {
   return (
     <>
-    <div style={{"width":"100%","height":"100vh","display":"flex","alignItems":"center","justifyContent":"center","background":"#0c1116"}}>
-      <div style={{"position":"relative","width":"min(100vw,177.78vh)","height":"min(56.25vw,100vh)","fontSize":"min(1vw,1.7778vh)","overflow":"hidden","background":"#7a5a2e","boxShadow":"0 0 4em rgba(0,0,0,.6)"}}>
+    <div style={{"width":"100%","height":"calc(var(--vh, 1vh) * 100)","display":"flex","alignItems":"center","justifyContent":"center","background":"#0c1116"}}>
+      <div style={{"position":"relative","width":"min(calc(var(--vw, 1vw) * 100),calc(var(--vh, 1vh) * 177.78))","height":"min(calc(var(--vw, 1vw) * 56.25),calc(var(--vh, 1vh) * 100))","fontSize":"min(calc(var(--vw, 1vw) * 1),calc(var(--vh, 1vh) * 1.7778))","overflow":"hidden","background":"#7a5a2e","boxShadow":"0 0 4em rgba(0,0,0,.6)"}}>
         {$v.sceneHome ? (
           <>
             <div style={{"position":"absolute","inset":"0"}}>
@@ -65,7 +65,7 @@ export default function View({ $v }) {
               {$v.overlaySrc ? (
                 <>
                   {"\n  "}
-                  <div onClick={$v.closeOverlay} style={{"position":"absolute","inset":"0","display":"flex","alignItems":"center","justifyContent":"center","background":"rgba(8,12,18,.72)","backdropFilter":"blur(2px)","animation":"mkFade .18s ease both","cursor":"zoom-out"}}>
+                  <div onClick={$v.closeOverlay} style={{"position":"absolute","inset":"0","display":"flex","alignItems":"center","justifyContent":"center","background":"rgba(8,12,18,.72)","backdropFilter":"blur(calc(var(--u) * 2 / 12.8))","animation":"mkFade .18s ease both","cursor":"zoom-out"}}>
                     {"\n    "}
                     <div style={{"position":"relative","width":"92%","animation":"mkPop .32s cubic-bezier(.2,1.3,.4,1) both","cursor":"default"}}>
                       {"\n      "}

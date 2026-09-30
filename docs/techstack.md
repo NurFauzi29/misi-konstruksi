@@ -26,6 +26,12 @@ src/App.tsx         menampilkan scene aktif
 - **`scene.css`** — `<style>` dari `<helmet>` (keyframes, dll.) + kelas hover/active. Disuntikkan hanya saat scene aktif, sama seperti halaman terpisah di mockup.
 - **File hasil konversi jangan diedit manual.** Ubah di Claude Design → export ulang ke `mockup/` → `npm run convert`.
 
+Penyesuaian skala agar proporsional di semua ukuran layar (di 1280×720 hasilnya tetap identik dengan mockup):
+- `Nvw`/`Nvh` di template → `calc(var(--vw|--vh) * N)`; variabel diisi dari ukuran viewport yang benar-benar terlihat (`src/main.tsx`). Di HP, `vh` CSS dihitung seolah address bar tersembunyi sehingga stage terpotong.
+- `Npx` literal di template → `calc(var(--u) * N / 12.8)` (`--u` = 1em stage; desain mockup berbasis stage 1280 px).
+- `<button>`/`<input>` tidak mewarisi font-size (bawaan browser 13,333 px) dan punya padding/border bawaan dalam px — `src/global.css` membuatnya ikut skala stage.
+- `text-size-adjust: 100%` mencegah Safari iOS memperbesar teks saat landscape.
+
 Perbedaan perilaku yang disengaja dari mockup (karena satu halaman, bukan 6 file):
 - Navigasi antar-scene tanpa reload (`nav.js`).
 - Progres misi di `sessionStorage` (`mk_p_*`) — hilang saat tab ditutup, cocok untuk komputer sekolah yang dipakai bergantian. Status musik tetap di `localStorage` seperti mockup.
