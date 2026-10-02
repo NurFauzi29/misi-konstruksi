@@ -37,7 +37,7 @@ const P3 = { ...P2, s3: { ever: true } };
 const P4 = { ...P3, s4: { ever: true } };
 const ALL_DONE = { ...P4, s5: { ever: true, xp: 900 } };
 const SCENARIOS = [
-  { name: 's1-home', file: F[0], steps: [{ click: 'Info Game' }, { click: 'Tutup' }, { click: 'Pengembang' }] },
+  { name: 's1-home', file: F[0], steps: [{ click: 'Info Game' }, { click: 'Tutup' }, { click: 'Pengembang' }, { click: 'Tutup' }, { click: 'Referensi' }] },
   { name: 's1-panduan', file: F[0], steps: [{ click: 'Mulai', wait: 400 }, { click: 'Panduan' }] },
   { name: 's1-terkunci', file: F[0], steps: [{ click: 'Mulai', wait: 400 }, { click: 'Tebak Profesi (terkunci)' }] },
   { name: 's1-ke-s2', file: F[0], steps: [{ click: 'Mulai', wait: 400 }, { click: 'Panduan' }, { click: 'Selanjutnya — mulai misi profesi', wait: 1500 }] },

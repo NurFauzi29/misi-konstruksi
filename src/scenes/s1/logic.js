@@ -143,7 +143,7 @@ class Component extends DCLogic {
       onMulai: () => { this.sfx('click'); setTimeout(() => this.goScene('panduan'), 160); },
       onInfo: () => { this.sfx('click'); this.setState({ overlaySrc: RES('infoImg', 'assets/p-informasi-game.webp') }); },
       onPengembang: () => { this.sfx('click'); this.setState({ overlaySrc: RES('pengImg', 'assets/p-pengembang.webp') }); },
-      onReferensi: () => { this.sfx('click'); this.showToast('Daftar referensi & sumber aset menyusul'); },
+      onReferensi: () => { this.sfx('click'); this.setState({ overlaySrc: RES('refImg', 'assets/p-referensi.webp') }); },
       pMap: s.pView === 'map',
       pDoc: s.pView === 'panduan',
       pOpen: () => { this.sfx('click'); this.setState({ pView: 'panduan' }); },
